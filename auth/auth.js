@@ -1,6 +1,6 @@
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
-const { User } = require('../database/schema')
+const { User } = require('../database/Schema')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const JWTStrategy = require('passport-jwt').Strategy
