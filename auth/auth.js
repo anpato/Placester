@@ -5,8 +5,9 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const JWTStrategy = require('passport-jwt').Strategy
 const ExtractJwt = require('passport-jwt').ExtractJwt
-const SaltFactor = 12
 require('dotenv').config()
+
+const SaltFactor = process.env.SALT_FACTOR
 
 const SECRET = process.env.APP_SECRET
 
