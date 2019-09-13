@@ -10,6 +10,9 @@ const CategorySchema = new mongoose.Schema(
 		},
 		rating: {
 			type: Number
+		},
+		image_url: {
+			type: String
 		}
 	},
 	{
