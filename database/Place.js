@@ -7,9 +7,6 @@ const PlaceSchema = new Schema(
 			required: true,
 			type: String
 		},
-		venue_type: {
-			type: String
-		},
 		location: {
 			address: {
 				type: String
@@ -20,15 +17,23 @@ const PlaceSchema = new Schema(
 			state: {
 				type: String
 			},
-			longitude: {
-				type: String
+			lng: {
+				type: Number
 			},
-			latitude: {
+			lat: {
+				type: Number
+			},
+			postalCode: String,
+			cc: {
 				type: String
 			}
 		},
 		images: {
 			type: [{ type: String }]
+		},
+		category: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'Category'
 		}
 	},
 	{

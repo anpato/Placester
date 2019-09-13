@@ -1,0 +1,37 @@
+[
+  {
+    "name": "Restaurant",
+    "pluralName": "Restaurants",
+    "rating": 0
+  },
+  {
+    "name": "Nightlife",
+    "pluralName": "Nightlife",
+    "rating": 0
+  },
+  {
+    "name": "Bar",
+    "pluralName": "Bars",
+    "rating": 0
+  },
+  {
+    "name": "Family Friendly",
+    "pluralName": "Family Friendly",
+    "rating": 0
+  },
+  {
+    "name": "Hangout",
+    "pluralName": "Hangouts",
+    "rating": 0
+  },
+  {
+    "name": "Attraction",
+    "pluralName": "Attractions",
+    "rating": 0
+  },
+  {
+    "name": "Recreation",
+    "pluralName": "Recreation",
+    "rating": 0
+  }
+]

@@ -1,0 +1,396 @@
+[
+  {
+    "name": "Green Lake Loop",
+    "contact": {},
+    "location": {
+      "address": "7201 E Green Lake Dr N",
+      "crossStreet": "path around Green Lake",
+      "lat": 47.68066602728803,
+      "lng": -122.33453996244677,
+      "postalCode": "98115",
+      "cc": "US",
+      "city": "Seattle",
+      "state": "WA"
+    }
+  },
+  {
+    "name": "Elliott Bay Book Company",
+    "contact": {},
+    "location": {
+      "address": "1521 10th Ave",
+      "crossStreet": "btwn Pike & Pine",
+      "lat": 47.614689085848305,
+      "lng": -122.31988535732319,
+      "postalCode": "98122",
+      "cc": "US",
+      "city": "Seattle",
+      "state": "WA"
+    }
+  },
+  {
+    "name": "Alki Beach Path",
+    "contact": {},
+    "location": {
+      "address": "Alki Ave SW",
+      "lat": 47.58939981056733,
+      "lng": -122.38349510595084,
+      "postalCode": "98116",
+      "cc": "US",
+      "city": "Seattle",
+      "state": "WA"
+    }
+  },
+  {
+    "name": "Discovery Park",
+    "contact": {},
+    "location": {
+      "address": "3801 Discovery Park Blvd",
+      "lat": 47.65817329174455,
+      "lng": -122.41026101941712,
+      "postalCode": "98199",
+      "cc": "US",
+      "city": "Seattle",
+      "state": "WA"
+    }
+  },
+  {
+    "name": "Gas Works Park",
+    "contact": {},
+    "location": {
+      "address": "2101 N Northlake Way",
+      "lat": 47.64622847115094,
+      "lng": -122.3355322181321,
+      "postalCode": "98103",
+      "cc": "US",
+      "city": "Seattle",
+      "state": "WA"
+    }
+  },
+  {
+    "name": "Seattle Center Playground",
+    "contact": {},
+    "location": {
+      "address": "305 Harrison St",
+      "lat": 47.62186859560178,
+      "lng": -122.3492536868005,
+      "postalCode": "98109",
+      "cc": "US",
+      "city": "Seattle",
+      "state": "WA"
+    }
+  },
+  {
+    "name": "Chuck's Hop Shop",
+    "contact": {},
+    "location": {
+      "address": "656 NW 85th St",
+      "crossStreet": "at 8th Ave NW",
+      "lat": 47.69078442791863,
+      "lng": -122.36586235507566,
+      "postalCode": "98117",
+      "cc": "US",
+      "city": "Seattle",
+      "state": "WA"
+    }
+  },
+  {
+    "name": "Seward Park",
+    "contact": {},
+    "location": {
+      "address": "5895 Lake Washington Blvd. S",
+      "crossStreet": "at S Juneau St.",
+      "lat": 47.550206931134966,
+      "lng": -122.25733181932064,
+      "postalCode": "98118",
+      "cc": "US",
+      "city": "Seattle",
+      "state": "WA"
+    }
+  },
+  {
+    "name": "Volunteer Park",
+    "contact": {},
+    "location": {
+      "address": "1247 15th Ave E",
+      "lat": 47.62850359125462,
+      "lng": -122.31597687017751,
+      "postalCode": "98112",
+      "cc": "US",
+      "city": "Seattle",
+      "state": "WA"
+    }
+  },
+  {
+    "name": "Ballard Farmer's Market",
+    "contact": {},
+    "location": {
+      "address": "5330 Ballard Ave NW",
+      "crossStreet": "at 22nd Ave NW",
+      "lat": 47.66746622660104,
+      "lng": -122.3843155334636,
+      "postalCode": "98107",
+      "cc": "US",
+      "city": "Seattle",
+      "state": "WA"
+    }
+  },
+  {
+    "name": "Kerry Park",
+    "contact": {},
+    "location": {
+      "address": "211 Highland Dr",
+      "crossStreet": "at 3rd Ave W",
+      "lat": 47.62948099401784,
+      "lng": -122.35989162643655,
+      "postalCode": "98109",
+      "cc": "US",
+      "city": "Seattle",
+      "state": "WA"
+    }
+  },
+  {
+    "name": "Ellenos Real Greek Yogurt",
+    "contact": {},
+    "location": {
+      "address": "1500 Pike St, #12",
+      "crossStreet": "Pike Place & Pike Street",
+      "lat": 47.60884772199345,
+      "lng": -122.34047600660855,
+      "postalCode": "98101",
+      "cc": "US",
+      "city": "Seattle",
+      "state": "WA"
+    }
+  },
+  {
+    "name": "Seattle Bouldering Project",
+    "contact": {},
+    "location": {
+      "address": "900 Poplar Pl S",
+      "lat": 47.59350528645206,
+      "lng": -122.31092469333515,
+      "postalCode": "98144",
+      "cc": "US",
+      "city": "Seattle",
+      "state": "WA"
+    }
+  },
+  {
+    "name": "Alki Beach Park",
+    "contact": {},
+    "location": {
+      "address": "1702 Alki Ave. SW",
+      "lat": 47.5798688713907,
+      "lng": -122.40904215862092,
+      "postalCode": "98116",
+      "cc": "US",
+      "city": "Seattle",
+      "state": "WA"
+    }
+  },
+  {
+    "name": "Ada's Technical Books and Cafe",
+    "contact": {},
+    "location": {
+      "address": "425 15th Ave E",
+      "crossStreet": "btwn E Republican St & E Harrison St",
+      "lat": 47.6226861936587,
+      "lng": -122.31295126749109,
+      "postalCode": "98112",
+      "cc": "US",
+      "city": "Seattle",
+      "state": "WA"
+    }
+  },
+  {
+    "name": "Wood Shop BBQ",
+    "contact": {},
+    "location": {
+      "address": "2513 S Jackson St",
+      "crossStreet": "Jackson and 25th",
+      "lat": 47.59914107447791,
+      "lng": -122.29924860515175,
+      "postalCode": "98144",
+      "cc": "US",
+      "city": "Seattle",
+      "state": "WA"
+    }
+  },
+  {
+    "name": "REI",
+    "contact": {},
+    "location": {
+      "address": "222 Yale Ave N",
+      "crossStreet": "at Eastlake Ave E",
+      "lat": 47.6203092,
+      "lng": -122.3297256,
+      "postalCode": "98109",
+      "cc": "US",
+      "city": "Seattle",
+      "state": "WA"
+    }
+  },
+  {
+    "name": "Cafe Besalu",
+    "contact": {},
+    "location": {
+      "address": "5909 24th Ave NW",
+      "crossStreet": "btwn NW 59th & 60th St",
+      "lat": 47.67197127046342,
+      "lng": -122.38775528572725,
+      "postalCode": "98107",
+      "cc": "US",
+      "city": "Seattle",
+      "state": "WA"
+    }
+  },
+  {
+    "name": "Cinerama",
+    "contact": {},
+    "location": {
+      "address": "2100 4th Ave",
+      "crossStreet": "at Lenora St",
+      "lat": 47.6142,
+      "lng": -122.34135,
+      "postalCode": "98121",
+      "cc": "US",
+      "city": "Seattle",
+      "state": "WA"
+    }
+  },
+  {
+    "name": "Pike Place Market",
+    "contact": {},
+    "location": {
+      "address": "85 Pike St",
+      "crossStreet": "at Pine St",
+      "lat": 47.60959260782362,
+      "lng": -122.3414381733235,
+      "postalCode": "98101",
+      "cc": "US",
+      "city": "Seattle",
+      "state": "WA"
+    }
+  },
+  {
+    "name": "Golden Gardens Park",
+    "contact": {},
+    "location": {
+      "address": "8498 Seaview Pl NW",
+      "lat": 47.69058264501714,
+      "lng": -122.40329577588459,
+      "postalCode": "98117",
+      "cc": "US",
+      "city": "Seattle",
+      "state": "WA"
+    }
+  },
+  {
+    "name": "Washington Park Arboretum",
+    "contact": {},
+    "location": {
+      "address": "2300 Arboretum Dr E",
+      "lat": 47.63974019783865,
+      "lng": -122.29472110236031,
+      "postalCode": "98112",
+      "cc": "US",
+      "city": "Seattle",
+      "state": "WA"
+    }
+  },
+  {
+    "name": "Alki Point",
+    "contact": {},
+    "location": {
+      "crossStreet": "Harbor & Alki",
+      "lat": 47.59457347678062,
+      "lng": -122.38454079917233,
+      "postalCode": "98164",
+      "cc": "US",
+      "city": "Seattle",
+      "state": "WA"
+    }
+  },
+  {
+    "name": "The Museum of Flight",
+    "contact": {},
+    "location": {
+      "address": "9404 E Marginal Way S",
+      "crossStreet": "at 96th Pl",
+      "lat": 47.518627895985176,
+      "lng": -122.2965398426986,
+      "postalCode": "98108",
+      "cc": "US",
+      "city": "Tukwila",
+      "state": "WA"
+    }
+  },
+  {
+    "name": "Westcrest Park",
+    "contact": {},
+    "location": {
+      "address": "9000 8th Ave. SW",
+      "lat": 47.523844787207004,
+      "lng": -122.34153985977173,
+      "postalCode": "98108",
+      "cc": "US",
+      "city": "Seattle",
+      "state": "WA"
+    }
+  },
+  {
+    "name": "Myrtle Edwards Park",
+    "contact": {},
+    "location": {
+      "address": "3130 Alaskan Way W",
+      "lat": 47.6191188961201,
+      "lng": -122.35999927289357,
+      "postalCode": "98121",
+      "cc": "US",
+      "city": "Seattle",
+      "state": "WA"
+    }
+  },
+  {
+    "name": "Il Corvo",
+    "contact": {},
+    "location": {
+      "address": "217 James St",
+      "crossStreet": "btwn 2nd & 3rd Ave",
+      "lat": 47.602521877965955,
+      "lng": -122.33195233639914,
+      "postalCode": "98104",
+      "cc": "US",
+      "city": "Seattle",
+      "state": "WA"
+    }
+  },
+  {
+    "name": "Chuck's Hop Shop - Central District",
+    "contact": {},
+    "location": {
+      "address": "2001 E Union St",
+      "crossStreet": "at 20th Ave",
+      "lat": 47.61285551371564,
+      "lng": -122.30592401038638,
+      "postalCode": "98122",
+      "cc": "US",
+      "city": "Seattle",
+      "state": "WA"
+    }
+  },
+  {
+    "name": "Seattle Center",
+    "contact": {},
+    "location": {
+      "address": "305 Harrison St",
+      "crossStreet": "at 5th Ave",
+      "lat": 47.622190306287365,
+      "lng": -122.35147476196289,
+      "postalCode": "98109",
+      "cc": "US",
+      "city": "Seattle",
+      "state": "WA"
+    }
+  }
+]

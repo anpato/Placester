@@ -5,9 +5,14 @@ const logger = require('morgan')
 const passport = require('passport')
 const dotenv = require('dotenv')
 const mongoose = require('mongoose')
-const AuthRouter = require('./routes/AuthRouter')
+
 const { userAuthorized } = require('./auth/auth')
 dotenv.config()
+
+// routers
+const AuthRouter = require('./routes/AuthRouter')
+const CategoryRouter = require('./routes/CategoryRouter')
+// routers
 
 const PORT = process.env.PORT || 3001
 
@@ -22,11 +27,16 @@ app.use(bodyParser.json())
 // App Routes
 app.use('/auth', AuthRouter)
 app.use('/app', userAuthorized)
+app.use('/categories', CategoryRouter)
 app.use(passport.initialize())
 
 // mongoose connection to mongo cloud db
 const uri = process.env.DATABASE_URI
-mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true })
+mongoose.connect(uri, {
+	useNewUrlParser: true,
+	useCreateIndex: true,
+	useUnifiedTopology: true
+})
 mongoose.connection.once('open', () => {
 	console.log(`connected to ${uri}`)
 })

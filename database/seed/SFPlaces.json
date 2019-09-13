@@ -1,0 +1,365 @@
+[
+  {
+    "name": "Flora Grubb Gardens",
+    "location": {
+      "address": "1634 Jerrold Ave",
+      "lat": 37.739588651654294,
+      "lng": -122.3901712377316,
+      "postalCode": "94124",
+      "cc": "US",
+      "city": "San Francisco",
+      "state": "CA"
+    }
+  },
+  {
+    "name": "Golden Gate Park",
+    "location": {
+      "address": "501 Stanyan St",
+      "lat": 37.76973638665379,
+      "lng": -122.48204941686708,
+      "postalCode": "94117",
+      "cc": "US",
+      "city": "San Francisco",
+      "state": "CA"
+    }
+  },
+  {
+    "name": "Collis P. Huntington Park",
+    "location": {
+      "address": "California St",
+      "lat": 37.79216169939808,
+      "lng": -122.4121543765068,
+      "postalCode": "94108",
+      "cc": "US",
+      "city": "San Francisco",
+      "state": "CA"
+    }
+  },
+  {
+    "name": "Lands End Lookout",
+    "location": {
+      "address": "22 Merrie Way",
+      "lat": 37.779723,
+      "lng": -122.511576,
+      "postalCode": "94121",
+      "cc": "US",
+      "city": "San Francisco",
+      "state": "CA"
+    }
+  },
+  {
+    "name": "Lands End",
+    "location": {
+      "address": "El Camino Del Mar",
+      "lat": 37.78315503056424,
+      "lng": -122.51118555665016,
+      "postalCode": "94121",
+      "cc": "US",
+      "neighborhood": "Sea Cliff",
+      "city": "San Francisco",
+      "state": "CA"
+    }
+  },
+  {
+    "name": "Presidio of San Francisco",
+    "location": {
+      "address": "Golden Gate National Recreation Area",
+      "lat": 37.79923865734214,
+      "lng": -122.4647283554077,
+      "postalCode": "94129",
+      "cc": "US",
+      "city": "San Francisco",
+      "state": "CA"
+    }
+  },
+  {
+    "name": "Good Vibrations",
+    "location": {
+      "address": "603 Valencia St",
+      "lat": 37.76319458096596,
+      "lng": -122.4217345739337,
+      "postalCode": "94110",
+      "cc": "US",
+      "city": "San Francisco",
+      "state": "CA"
+    }
+  },
+  {
+    "name": "The Secret Alley",
+    "location": {
+      "address": "180 Capp St",
+      "lat": 37.763763835109664,
+      "lng": -122.41935185019999,
+      "postalCode": "94110",
+      "cc": "US",
+      "city": "San Francisco",
+      "state": "CA"
+    }
+  },
+  {
+    "name": "Green Apple Books",
+    "location": {
+      "address": "506 Clement St",
+      "lat": 37.78302094764066,
+      "lng": -122.46461446474054,
+      "postalCode": "94118",
+      "cc": "US",
+      "city": "San Francisco",
+      "state": "CA"
+    }
+  },
+  {
+    "name": "Twin Peaks Summit",
+    "location": {
+      "address": "100 Christmas Tree Point Rd",
+      "lat": 37.75457824954849,
+      "lng": -122.44688093662262,
+      "postalCode": "94114",
+      "cc": "US",
+      "city": "San Francisco",
+      "state": "CA"
+    }
+  },
+  {
+    "name": "Bernal Heights Park",
+    "location": {
+      "address": "10 Bernal Heights Blvd",
+      "lat": 37.74326497795579,
+      "lng": -122.41495681987165,
+      "postalCode": "94110",
+      "cc": "US",
+      "city": "San Francisco",
+      "state": "CA"
+    }
+  },
+  {
+    "name": "Hellman Hollow",
+    "location": {
+      "address": "John F. Kennedy Dr",
+      "lat": 37.76913729221543,
+      "lng": -122.48509168624878,
+      "cc": "US",
+      "city": "San Francisco",
+      "state": "CA"
+    }
+  },
+  {
+    "name": "Golden Gate Overlook",
+    "location": {
+      "address": "Lincoln Blvd & Merchant Rd",
+      "lat": 37.80410459983463,
+      "lng": -122.47678756713866,
+      "postalCode": "94129",
+      "cc": "US",
+      "city": "San Francisco",
+      "state": "CA"
+    }
+  },
+  {
+    "name": "Palace of Fine Arts Theater",
+    "location": {
+      "address": "3301 Lyon St",
+      "lat": 37.80206826733293,
+      "lng": -122.44871010638515,
+      "postalCode": "94123",
+      "cc": "US",
+      "city": "San Francisco",
+      "state": "CA"
+    }
+  },
+  {
+    "name": "Neighbor Bakehouse",
+    "location": {
+      "address": "2343 3rd St",
+      "lat": 37.759746,
+      "lng": -122.38823,
+      "postalCode": "94107",
+      "cc": "US",
+      "city": "San Francisco",
+      "state": "CA"
+    }
+  },
+  {
+    "name": "Pushkin",
+    "location": {
+      "address": "380 Bush St",
+      "lat": 37.79094301071348,
+      "lng": -122.40387738626474,
+      "postalCode": "94104",
+      "cc": "US",
+      "city": "San Francisco",
+      "state": "CA"
+    }
+  },
+  {
+    "name": "The Olympic Club",
+    "location": {
+      "address": "524 Post St",
+      "lat": 37.788181056861674,
+      "lng": -122.41106656038573,
+      "postalCode": "94102",
+      "cc": "US",
+      "city": "San Francisco",
+      "state": "CA"
+    }
+  },
+  {
+    "name": "Dogpatch Boulders",
+    "location": {
+      "address": "2573 3rd St",
+      "lat": 37.75662467116606,
+      "lng": -122.38796989985903,
+      "postalCode": "94107",
+      "cc": "US",
+      "city": "San Francisco",
+      "state": "CA"
+    }
+  },
+  {
+    "name": "Palace of Fine Arts",
+    "location": {
+      "address": "3301 Lyon St",
+      "lat": 37.80288814426483,
+      "lng": -122.44841247797011,
+      "postalCode": "94123",
+      "cc": "US",
+      "city": "San Francisco",
+      "state": "CA"
+    }
+  },
+  {
+    "name": "Sutro Heights Park",
+    "location": {
+      "address": "48th Ave",
+      "lat": 37.777668670358395,
+      "lng": -122.51079797744751,
+      "postalCode": "94121",
+      "cc": "US",
+      "neighborhood": "Sutro Heights, San Francisco, CA",
+      "city": "San Francisco",
+      "state": "CA"
+    }
+  },
+  {
+    "name": "Fort Funston",
+    "location": {
+      "address": "500 Skyline Blvd",
+      "lat": 37.714986930252145,
+      "lng": -122.50263342459404,
+      "postalCode": "94132",
+      "cc": "US",
+      "city": "San Francisco",
+      "state": "CA"
+    }
+  },
+  {
+    "name": "Salt & Straw",
+    "location": {
+      "address": "586 Hayes St",
+      "lat": 37.77653240407315,
+      "lng": -122.42605136320933,
+      "postalCode": "94102",
+      "cc": "US",
+      "neighborhood": "Hayes Valley",
+      "city": "San Francisco",
+      "state": "CA"
+    }
+  },
+  {
+    "name": "San Francisco Museum of Modern Art",
+    "location": {
+      "address": "151 3rd St",
+      "lat": 37.78589423994824,
+      "lng": -122.40089653026742,
+      "postalCode": "94103",
+      "cc": "US",
+      "city": "San Francisco",
+      "state": "CA"
+    }
+  },
+  {
+    "name": "SFJazz Center",
+    "location": {
+      "address": "201 Franklin St",
+      "lat": 37.77635001768186,
+      "lng": -122.42153942584991,
+      "postalCode": "94102",
+      "cc": "US",
+      "neighborhood": "Civic Center",
+      "city": "San Francisco",
+      "state": "CA"
+    }
+  },
+  {
+    "name": "Alamo Drafthouse Cinema",
+    "location": {
+      "address": "2550 Mission St",
+      "lat": 37.756207,
+      "lng": -122.419026,
+      "postalCode": "94110",
+      "cc": "US",
+      "city": "San Francisco",
+      "state": "CA"
+    }
+  },
+  {
+    "name": "Archimedes Banya",
+    "location": {
+      "address": "748 Innes Ave",
+      "lat": 37.730464,
+      "lng": -122.372789,
+      "postalCode": "94124",
+      "cc": "US",
+      "city": "San Francisco",
+      "state": "CA"
+    }
+  },
+  {
+    "name": "Dog Eared Books",
+    "location": {
+      "address": "900 Valencia St",
+      "lat": 37.758445500765696,
+      "lng": -122.4213655574246,
+      "postalCode": "94110",
+      "cc": "US",
+      "city": "San Francisco",
+      "state": "CA"
+    }
+  },
+  {
+    "name": "Lands End Coastal Trail",
+    "location": {
+      "address": "2500 El Camino del Mar",
+      "lat": 37.78418314781439,
+      "lng": -122.50902235507965,
+      "postalCode": "94121",
+      "cc": "US",
+      "city": "San Francisco",
+      "state": "CA"
+    }
+  },
+  {
+    "name": "Lafayette Park",
+    "location": {
+      "address": "2000 Sacramento St",
+      "lat": 37.791246594951375,
+      "lng": -122.42808063995858,
+      "postalCode": "94109",
+      "cc": "US",
+      "city": "San Francisco",
+      "state": "CA"
+    }
+  },
+  {
+    "name": "Castro Theatre",
+    "location": {
+      "address": "429 Castro St",
+      "lat": 37.762044145115574,
+      "lng": -122.43502202215997,
+      "postalCode": "94114",
+      "cc": "US",
+      "city": "San Francisco",
+      "state": "CA"
+    }
+  }
+]

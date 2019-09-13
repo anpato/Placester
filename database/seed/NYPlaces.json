@@ -1,0 +1,365 @@
+    [
+      {
+        "name": "Central Park",
+        "location": {
+          "address": "59th St to 110th St",
+          "lat": 40.78408342593807,
+          "lng": -73.96485328674316,
+          "postalCode": "10028",
+          "cc": "US",
+          "city": "New York",
+          "state": "NY"
+        }
+      },
+      {
+        "name": "Brooklyn Bridge Park",
+        "location": {
+          "address": "Main St",
+          "lat": 40.702282,
+          "lng": -73.996456,
+          "postalCode": "11201",
+          "cc": "US",
+          "neighborhood": "DUMBO, Brooklyn, NY",
+          "city": "Brooklyn",
+          "state": "NY"
+        }
+      },
+      {
+        "name": "Minskoff Theatre",
+        "location": {
+          "address": "1515 Broadway",
+          "lat": 40.75738906224092,
+          "lng": -73.98553701970972,
+          "postalCode": "10036",
+          "cc": "US",
+          "city": "New York",
+          "state": "NY"
+        }
+      },
+      {
+        "name": "Hudson River Greenway Running Path",
+        "location": {
+          "address": "Hudson River Greenway",
+          "lat": 40.73255155774,
+          "lng": -74.01057958602905,
+          "postalCode": "10282",
+          "cc": "US",
+          "city": "New York",
+          "state": "NY"
+        }
+      },
+      {
+        "name": "The Metropolitan Museum of Art (Metropolitan Museum of Art)",
+        "location": {
+          "address": "1000 5th Ave",
+          "lat": 40.77972902126812,
+          "lng": -73.96341562271118,
+          "postalCode": "10028",
+          "cc": "US",
+          "city": "New York",
+          "state": "NY"
+        }
+      },
+      {
+        "name": "Los Tacos No. 1",
+        "location": {
+          "address": "229 W 43rd St",
+          "lat": 40.75713361630251,
+          "lng": -73.98753586979832,
+          "postalCode": "10036",
+          "cc": "US",
+          "neighborhood": "Theater District",
+          "city": "New York",
+          "state": "NY"
+        }
+      },
+      {
+        "name": "Hudson River Park",
+        "location": {
+          "address": "West St",
+          "lat": 40.733486648634525,
+          "lng": -74.01050581951031,
+          "postalCode": "10011",
+          "cc": "US",
+          "city": "New York",
+          "state": "NY"
+        }
+      },
+      {
+        "name": "Gantry Plaza State Park",
+        "location": {
+          "address": "474 48th Ave",
+          "lat": 40.74655794031174,
+          "lng": -73.9580512046814,
+          "postalCode": "11109",
+          "cc": "US",
+          "city": "Queens",
+          "state": "NY"
+        }
+      },
+      {
+        "name": "Conservatory Garden",
+        "location": {
+          "address": "1231 5th Ave",
+          "lat": 40.793531,
+          "lng": -73.952032,
+          "postalCode": "10029",
+          "cc": "US",
+          "city": "New York",
+          "state": "NY"
+        }
+      },
+      {
+        "name": "Equinox West 50th Street",
+        "location": {
+          "address": "1633 Broadway",
+          "lat": 40.761912,
+          "lng": -73.984268,
+          "postalCode": "10019",
+          "cc": "US",
+          "city": "New York",
+          "state": "NY"
+        }
+      },
+      {
+        "name": "Bryant Park",
+        "location": {
+          "address": "E 42nd St",
+          "lat": 40.753621,
+          "lng": -73.983265,
+          "postalCode": "10018",
+          "cc": "US",
+          "neighborhood": "Midtown",
+          "city": "New York",
+          "state": "NY"
+        }
+      },
+      {
+        "name": "I Love Kickboxing - 43rd Street",
+        "location": {
+          "address": "303 E 43rd Street, Lower Level",
+          "lat": 40.75058,
+          "lng": -73.97154,
+          "postalCode": "10017",
+          "cc": "US",
+          "city": "New York",
+          "state": "NY"
+        }
+      },
+      {
+        "name": "Astor Wines & Spirits",
+        "location": {
+          "address": "399 Lafayette St",
+          "lat": 40.727984051970246,
+          "lng": -73.99304720778368,
+          "postalCode": "10003",
+          "cc": "US",
+          "city": "New York",
+          "state": "NY"
+        }
+      },
+      {
+        "name": "Riverside Park",
+        "location": {
+          "address": "Riverside Dr",
+          "lat": 40.806809433439135,
+          "lng": -73.96865129470825,
+          "postalCode": "10025",
+          "cc": "US",
+          "city": "New York",
+          "state": "NY"
+        }
+      },
+      {
+        "name": "High Line",
+        "location": {
+          "address": "btwn Gansevoort & W 34th St",
+          "lat": 40.746825,
+          "lng": -74.005507,
+          "postalCode": "10011",
+          "cc": "US",
+          "city": "New York",
+          "state": "NY"
+        }
+      },
+      {
+        "name": "Washington Square Park",
+        "location": {
+          "address": "W 4th St",
+          "lat": 40.73081579656163,
+          "lng": -73.9974582195282,
+          "postalCode": "10012",
+          "cc": "US",
+          "city": "New York",
+          "state": "NY"
+        }
+      },
+      {
+        "name": "Aire Ancient Baths",
+        "location": {
+          "address": "88 Franklin St",
+          "lat": 40.718141411641234,
+          "lng": -74.00494121234846,
+          "postalCode": "10013",
+          "cc": "US",
+          "city": "New York",
+          "state": "NY"
+        }
+      },
+      {
+        "name": "Brooklyn Bridge Park - Pier 5",
+        "location": {
+          "address": "Brooklyn Bridge Pk Greenway",
+          "lat": 40.694918,
+          "lng": -74.001686,
+          "postalCode": "11201",
+          "cc": "US",
+          "city": "Brooklyn",
+          "state": "NY"
+        }
+      },
+      {
+        "name": "Lincoln Center for the Performing Arts",
+        "location": {
+          "address": "70 Lincoln Center Plz",
+          "lat": 40.77243180562227,
+          "lng": -73.983332935095,
+          "postalCode": "10023",
+          "cc": "US",
+          "city": "New York",
+          "state": "NY"
+        }
+      },
+      {
+        "name": "Metrograph",
+        "location": {
+          "address": "7 Ludlow St",
+          "lat": 40.714998539086416,
+          "lng": -73.99103539533131,
+          "postalCode": "10002",
+          "cc": "US",
+          "city": "New York",
+          "state": "NY"
+        }
+      },
+      {
+        "name": "Brooklyn Bridge Park - Pier 6",
+        "location": {
+          "address": "Pier 6",
+          "lat": 40.693288713137854,
+          "lng": -74.00277972221375,
+          "postalCode": "11201",
+          "cc": "US",
+          "city": "Brooklyn",
+          "state": "NY"
+        }
+      },
+      {
+        "name": "St. Patrick's Cathedral",
+        "location": {
+          "address": "14 E 51st St",
+          "lat": 40.7583584690861,
+          "lng": -73.97582607482036,
+          "postalCode": "10022",
+          "cc": "US",
+          "city": "New York",
+          "state": "NY"
+        }
+      },
+      {
+        "name": "Elf Cosmetics HQ",
+        "location": {
+          "address": "10 W 33rd St Rm 802",
+          "lat": 40.72988079657862,
+          "lng": -73.99235464508372,
+          "postalCode": "10001",
+          "cc": "US",
+          "city": "New York",
+          "state": "NY"
+        }
+      },
+      {
+        "name": "Bethesda Fountain",
+        "location": {
+          "address": "Terrace Dr",
+          "lat": 40.77429373881737,
+          "lng": -73.9708399772644,
+          "postalCode": "10021",
+          "cc": "US",
+          "city": "New York",
+          "state": "NY"
+        }
+      },
+      {
+        "name": "Strand Bookstore",
+        "location": {
+          "address": "828 Broadway",
+          "lat": 40.73314000684355,
+          "lng": -73.99091161094675,
+          "postalCode": "10003",
+          "cc": "US",
+          "city": "New York",
+          "state": "NY"
+        }
+      },
+      {
+        "name": "The Public Theater",
+        "location": {
+          "address": "425 Lafayette St",
+          "lat": 40.72916880904384,
+          "lng": -73.99207037967628,
+          "postalCode": "10003",
+          "cc": "US",
+          "city": "New York",
+          "state": "NY"
+        }
+      },
+      {
+        "name": "The Metropolitan Opera (Metropolitan Opera)",
+        "location": {
+          "address": "70 Lincoln Center Plz",
+          "lat": 40.77274188001071,
+          "lng": -73.9844012260437,
+          "postalCode": "10023",
+          "cc": "US",
+          "city": "New York",
+          "state": "NY"
+        }
+      },
+      {
+        "name": "Madison Square Park",
+        "location": {
+          "address": "Madison Ave",
+          "lat": 40.74226204193276,
+          "lng": -73.98800611495972,
+          "postalCode": "10010",
+          "cc": "US",
+          "city": "New York",
+          "state": "NY"
+        }
+      },
+      {
+        "name": "Los Mariscos",
+        "location": {
+          "address": "409 West 15th St",
+          "lat": 40.74199972810892,
+          "lng": -74.00589003225507,
+          "postalCode": "10011",
+          "cc": "US",
+          "city": "New York",
+          "state": "NY"
+        }
+      },
+      {
+        "name": "Carl Schurz Park",
+        "location": {
+          "address": "599 E 86th St",
+          "lat": 40.77511823969361,
+          "lng": -73.94376326618595,
+          "postalCode": "10028",
+          "cc": "US",
+          "city": "New York",
+          "state": "NY"
+        }
+      }
+    ]
