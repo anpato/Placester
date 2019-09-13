@@ -53,7 +53,7 @@ PlaceRouter.post('/', async (req, res) => {
 		else {
 			const newPlace = await new Place(req.body)
 			await newPlace.save()
-			await res.send(newPlace)
+			res.send(newPlace)
 		}
 	} catch (error) {
 		throw error
