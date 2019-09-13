@@ -12,6 +12,7 @@ dotenv.config()
 // routers
 const AuthRouter = require('./routes/AuthRouter')
 const CategoryRouter = require('./routes/CategoryRouter')
+const PlaceRouter = require('./routes/PlaceRouter')
 // routers
 
 const PORT = process.env.PORT || 3001
@@ -28,6 +29,7 @@ app.use(bodyParser.json())
 app.use('/auth', AuthRouter)
 app.use('/app', userAuthorized)
 app.use('/categories', CategoryRouter)
+app.use('/places', PlaceRouter)
 app.use(passport.initialize())
 
 // mongoose connection to mongo cloud db
