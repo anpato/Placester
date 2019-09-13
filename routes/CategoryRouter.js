@@ -4,7 +4,11 @@ const { Category } = require('../database/schema')
 
 CategoryRouter.get('/', async (req, res) => {
 	try {
-		res.send(await Category.find().sort({ rating: 'descending' }))
+		res.send(
+			await Category.find()
+				.limit(5)
+				.sort({ rating: 'descending' })
+		)
 	} catch (error) {
 		throw error
 	}

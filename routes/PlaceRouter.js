@@ -24,8 +24,14 @@ PlaceRouter.post('/', async (req, res) => {
 	try {
 		const place = await Place.findOne().where({ name: req.body.name })
 		if (place) res.status(400).send({ err: `${req.body.name} already exists!` })
-		await res.send()
-	} catch (error) {}
+		else {
+			const newPlace = await new Place(req.body)
+			await newPlace.save()
+			await res.send(newPlace)
+		}
+	} catch (error) {
+		throw error
+	}
 })
 
 module.exports = PlaceRouter
