@@ -31,10 +31,12 @@ const PlaceSchema = new Schema(
 		images: {
 			type: [{ type: String }]
 		},
-		category: {
-			type: mongoose.Schema.Types.ObjectId,
-			ref: 'Category'
-		}
+		category: [
+			{
+				type: Schema.Types.ObjectId,
+				ref: 'Category'
+			}
+		]
 	},
 	{
 		timestamps: true

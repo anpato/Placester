@@ -39,8 +39,9 @@ PlaceRouter.get('/', async (req, res) => {
 
 PlaceRouter.get('/:place_id', async (req, res) => {
 	try {
-		const place = await Place.findById(req.params.place_id)
-		res.send(place)
+		await Place.findById(req.params.place_id)
+			.populate('Category')
+			.exec((err, places) => res.send(places))
 	} catch (error) {
 		throw error
 	}
