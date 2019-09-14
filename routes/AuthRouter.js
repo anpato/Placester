@@ -1,5 +1,6 @@
 const express = require('express')
 const authRouter = express.Router()
+const { User, Friend, Favorite } = require('../database/schema')
 const { passport, signToken } = require('../auth/auth')
 
 authRouter.post('/login', async (req, res, next) => {
@@ -48,15 +49,28 @@ authRouter.post('/signup', async (req, res, next) => {
 				return next(res.status(400).send({ error: msg }))
 			}
 			// console.log('looking for user', user)
-			if (err || !user) {
-				const error = new Error('Unsuccessful')
-				return next(error)
-			}
 			return res.json({ msg: 'user created', user: user })
 		} catch (error) {
 			return next(error)
 		}
 	})(req, res, next)
+})
+
+authRouter.delete('/:user_id', async (req, res) => {
+	try {
+		await User.findByIdAndDelete(req.params.user_id, {
+			useFindAndModify: false
+		})
+
+		await Favorite.deleteMany({ user_id: req.params.user_id })
+		await Friend.deleteMany({
+			user_id: req.params.user_id
+		})
+		await Friend.deleteMany({ friend_id: req.params.user_id })
+		res.send({ msg: 'Account Deleted!' })
+	} catch (error) {
+		throw error
+	}
 })
 
 module.exports = authRouter

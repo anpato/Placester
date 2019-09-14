@@ -7,7 +7,7 @@ const JWTStrategy = require('passport-jwt').Strategy
 const ExtractJwt = require('passport-jwt').ExtractJwt
 require('dotenv').config()
 
-const SaltFactor = process.env.SALT_FACTOR
+const SaltFactor = parseInt(process.env.SALT_FACTOR)
 
 const SECRET = process.env.APP_SECRET
 
@@ -36,7 +36,7 @@ passport.use(
 				await user.save()
 				done(null, user)
 			} catch (error) {
-				console.log(error.errors)
+				console.log(error)
 				done(error)
 			}
 		}

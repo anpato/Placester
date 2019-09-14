@@ -9,6 +9,15 @@ const Friend = new mongoose.Schema(
 		friend_id: {
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'User'
+		},
+		isRequested: {
+			type: Boolean
+		},
+		isAccepted: {
+			type: Boolean
+		},
+		wasRequested: {
+			type: Boolean
 		}
 	},
 	{

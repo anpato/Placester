@@ -13,6 +13,7 @@ dotenv.config()
 const AuthRouter = require('./routes/AuthRouter')
 const CategoryRouter = require('./routes/CategoryRouter')
 const FavoriteRouter = require('./routes/FavoriteRouter')
+const FriendRouter = require('./routes/FriendRouter')
 const PlaceRouter = require('./routes/PlaceRouter')
 
 // routers
@@ -32,6 +33,7 @@ app.use('/auth', AuthRouter)
 app.use('/app', userAuthorized)
 app.use('/categories', CategoryRouter)
 app.use('/favorites', FavoriteRouter)
+app.use('/friends', FriendRouter)
 app.use('/places', PlaceRouter)
 app.use(passport.initialize())
 
