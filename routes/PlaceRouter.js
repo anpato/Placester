@@ -42,7 +42,9 @@ PlaceRouter.get('/:place_id', async (req, res) => {
 		await Place.find()
 			.where({ _id: req.params.place_id })
 			.populate({ path: 'categories', model: Category })
-			.exec((err, places) => res.send(places))
+			.exec((err, places) =>
+				err ? res.status(400).send({ err: err }) : res.send(places)
+			)
 	} catch (error) {
 		throw error
 	}

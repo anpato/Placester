@@ -6,7 +6,7 @@ const FavoriteSchema = new mongoose.Schema(
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'User'
 		},
-		location_id: {
+		places: {
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'Place'
 		}
