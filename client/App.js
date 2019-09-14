@@ -1,19 +1,18 @@
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { createStackNavigator } from 'react-navigation-stack'
+import AuthScreen from './screens/AuthScreen'
+import { createAppContainer, createSwitchNavigator } from 'react-navigation'
 
-export default function App() {
-	return (
-		<View>
-			<Text></Text>
-		</View>
-	)
-}
-
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: '#fff',
-		alignItems: 'center',
-		justifyContent: 'center'
+const AuthStack = createStackNavigator(
+	{
+		SignIn: AuthScreen
+	},
+	{
+		headerMode: 'none'
 	}
-})
+)
+
+export default createAppContainer(
+	createSwitchNavigator({
+		Auth: AuthStack
+	})
+)
