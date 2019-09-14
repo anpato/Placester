@@ -1,5 +1,4 @@
-const express = require('express')
-const PlaceRouter = express.Router()
+const PlaceRouter = require('express').Router()
 const { Place, Category } = require('../database/Schema')
 
 PlaceRouter.get('/', async (req, res) => {

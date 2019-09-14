@@ -1,7 +1,6 @@
 const mongoose = require('mongoose')
-const Schema = mongoose.Schema
 
-const PlaceSchema = new Schema(
+const PlaceSchema = new mongoose.Schema(
 	{
 		name: {
 			required: true,
@@ -33,7 +32,7 @@ const PlaceSchema = new Schema(
 		},
 		categories: [
 			{
-				type: Schema.Types.ObjectId,
+				type: mongoose.Schema.Types.ObjectId,
 				ref: 'Category'
 			}
 		]

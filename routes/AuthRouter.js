@@ -1,9 +1,8 @@
-const express = require('express')
-const authRouter = express.Router()
+const AuthRouter = require('express').Router()
 const { User, Friend, Favorite } = require('../database/schema')
 const { passport, signToken } = require('../auth/auth')
 
-authRouter.post('/login', async (req, res, next) => {
+AuthRouter.post('/login', async (req, res, next) => {
 	passport.authenticate('login', async (err, user, info) => {
 		try {
 			if (err || !user) {
@@ -31,7 +30,7 @@ authRouter.post('/login', async (req, res, next) => {
 	})(req, res, next)
 })
 
-authRouter.post('/signup', async (req, res, next) => {
+AuthRouter.post('/signup', async (req, res, next) => {
 	passport.authenticate('signup', async (err, user, info) => {
 		try {
 			if (!user || err) {
@@ -56,7 +55,7 @@ authRouter.post('/signup', async (req, res, next) => {
 	})(req, res, next)
 })
 
-authRouter.delete('/:user_id', async (req, res) => {
+AuthRouter.delete('/:user_id', async (req, res) => {
 	try {
 		await User.findByIdAndDelete(req.params.user_id, {
 			useFindAndModify: false
@@ -73,4 +72,4 @@ authRouter.delete('/:user_id', async (req, res) => {
 	}
 })
 
-module.exports = authRouter
+module.exports = AuthRouter

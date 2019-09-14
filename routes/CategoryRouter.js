@@ -1,5 +1,4 @@
-const express = require('express')
-const CategoryRouter = express.Router()
+const CategoryRouter = require('express').Router()
 const { Category } = require('../database/schema')
 
 CategoryRouter.get('/', async (req, res) => {
