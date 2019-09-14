@@ -24,7 +24,7 @@ passport.use(
 		async (req, username, password, done) => {
 			try {
 				password = bcrypt.hashSync(password, SaltFactor)
-				const user = await new User({
+				const user = new User({
 					name: {
 						first: req.body.name.first,
 						last: req.body.name.last

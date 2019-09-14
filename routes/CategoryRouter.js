@@ -24,7 +24,7 @@ CategoryRouter.post('/', async (req, res) => {
 				msg: `${req.body.name} already exists, would you like to add this place to ${req.body.name} instead?`
 			})
 		} else {
-			const category = await new Category(req.body)
+			const category = new Category(req.body)
 			await category.save()
 			res.send(category)
 		}

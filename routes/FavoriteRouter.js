@@ -22,7 +22,7 @@ FavoriteRouter.post('/:user_id', async (req, res) => {
 			user_id: req.params.user_id
 		})
 		if (!favorite || !favorite.places.includes(req.body.places)) {
-			const newFavorite = await new Favorite({
+			const newFavorite = new Favorite({
 				user_id: req.params.user_id,
 				places: req.body.places
 			})
