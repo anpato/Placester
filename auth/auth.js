@@ -36,7 +36,6 @@ passport.use(
 				await user.save()
 				done(null, user)
 			} catch (error) {
-				console.log(error)
 				done(error)
 			}
 		}
