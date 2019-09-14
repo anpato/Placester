@@ -31,7 +31,7 @@ const PlaceSchema = new Schema(
 		images: {
 			type: [{ type: String }]
 		},
-		category: [
+		categories: [
 			{
 				type: Schema.Types.ObjectId,
 				ref: 'Category'

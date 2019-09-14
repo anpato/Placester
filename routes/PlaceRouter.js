@@ -1,6 +1,6 @@
 const express = require('express')
 const PlaceRouter = express.Router()
-const { Place } = require('../database/Schema')
+const { Place, Category } = require('../database/Schema')
 
 PlaceRouter.get('/', async (req, res) => {
 	try {
@@ -39,8 +39,9 @@ PlaceRouter.get('/', async (req, res) => {
 
 PlaceRouter.get('/:place_id', async (req, res) => {
 	try {
-		await Place.findById(req.params.place_id)
-			.populate('Category')
+		await Place.find()
+			.where({ _id: req.params.place_id })
+			.populate({ path: 'categories', model: Category })
 			.exec((err, places) => res.send(places))
 	} catch (error) {
 		throw error
