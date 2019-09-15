@@ -1,26 +1,34 @@
 import React from 'react'
 import { TextInput, StyleSheet } from 'react-native'
-import { primary } from '../styles/Colors'
+import { Platform } from '@unimodules/core'
 
 export const Input = ({
 	placeholder,
 	secureTextEntry,
 	onChangeText,
+	placeholderTextColor,
+	selectionColor,
+	value,
 	style
 }) => {
 	return (
 		<TextInput
-			style={[styles.input, style]}
+			autoCompleteType="off"
+			spellCheck={false}
+			selectionColor={selectionColor}
+			placeholderTextColor={placeholderTextColor}
+			style={[style, styles.input]}
 			secureTextEntry={secureTextEntry}
 			placeholder={placeholder}
 			onChangeText={onChangeText}
+			value={value}
 		/>
 	)
 }
 
 const styles = StyleSheet.create({
 	input: {
-		borderWidth: 2
-		// borderColor: primary
+		fontFamily: Platform.OS === 'ios' ? 'Avenir' : 'Roboto',
+		letterSpacing: 1.6
 	}
 })

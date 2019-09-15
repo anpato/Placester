@@ -2,10 +2,10 @@ import { AsyncStorage } from 'react-native'
 
 export const setUser = async (userId, token) => {
 	try {
-		await AsyncStorage.multiSet([
-			['user_id', userId.toString()],
-			['token', token]
-		])
+		await AsyncStorage.multiSet(
+			[['user_id', userId], ['user_token', token]],
+			(err) => (err ? alert(err) : null)
+		)
 	} catch (error) {
 		console.log(error)
 	}
@@ -13,9 +13,10 @@ export const setUser = async (userId, token) => {
 
 export const getToken = async () => {
 	try {
-		const token = await AsyncStorage.getItem('token')
-		if (token) token
-		else {
+		const token = await AsyncStorage.getItem('user_token')
+		if (token) {
+			return token
+		} else {
 			let err = new Error('No Token')
 			return err
 		}
