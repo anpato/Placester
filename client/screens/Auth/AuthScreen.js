@@ -39,6 +39,7 @@ export default class AuthScreen extends Component {
 		const { username, password } = this.state
 		try {
 			const resp = await loginUser({ username, password })
+			if (resp.status === 200) this.props.navigation.navigate('App')
 		} catch (error) {
 			this.setState({ isError: true })
 		} finally {

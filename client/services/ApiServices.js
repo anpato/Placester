@@ -30,3 +30,12 @@ export const signUpUser = async (data) => {
 		throw error
 	}
 }
+
+export const getCategories = async () => {
+	try {
+		const resp = await Api.get('/categories')
+		return resp.data
+	} catch (error) {
+		throw error
+	}
+}
