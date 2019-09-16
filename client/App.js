@@ -30,7 +30,12 @@ const AuthStack = createStackNavigator(
 
 const AppStack = createStackNavigator(
 	{
-		Home: HomeScreen
+		Home: {
+			screen: HomeScreen,
+			navigationOptions: {
+				header: null
+			}
+		}
 	},
 	{
 		defaultNavigationOptions: {

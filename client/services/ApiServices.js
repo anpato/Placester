@@ -1,7 +1,7 @@
 import Axios from 'axios'
 import { setUser, getUserId, getToken } from './config/Credentials'
 import { CLIENT_SECRET, CLIENT_ID } from 'react-native-dotenv'
-const BASE_URL = 'http://localhost:3001'
+const BASE_URL = 'http://172.16.4.219:3001'
 const JwtToken = 'token'
 
 const Api = Axios.create({

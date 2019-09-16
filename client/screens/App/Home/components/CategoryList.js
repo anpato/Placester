@@ -1,21 +1,16 @@
 import React from 'react'
-import {
-	View,
-	FlatList,
-	Image,
-	Text,
-	StyleSheet,
-	ImageBackground
-} from 'react-native'
-import { shadow, dark, white } from '../../../../styles/Colors'
-import { TouchableOpacity } from 'react-native-gesture-handler'
+import { View, FlatList, Image, Text, StyleSheet } from 'react-native'
+import { white } from '../../../../styles/Colors'
 import { shadowStyle } from '../../../../styles/Styles'
+import { Button } from '../../../../common/Button'
 import { Platform } from '@unimodules/core'
 
 const CategoryList = ({ data }) => {
 	const renderItem = ({ _id, image_url, pluralName }) => {
 		return (
-			<TouchableOpacity style={[styles.button, shadowStyle]}>
+			<Button
+				style={[styles.button, shadowStyle]}
+				onPress={() => console.log(_id)}>
 				<View style={[styles.card]}>
 					<Image
 						source={{ uri: image_url }}
@@ -29,7 +24,7 @@ const CategoryList = ({ data }) => {
 						<Text style={styles.text}>{pluralName}</Text>
 					</View>
 				</View>
-			</TouchableOpacity>
+			</Button>
 		)
 	}
 	return (
@@ -67,7 +62,7 @@ const styles = StyleSheet.create({
 	},
 	overlay: {
 		position: 'absolute',
-		backgroundColor: 'rgba(0,0,0,0.5)',
+		backgroundColor: 'rgba(0,0,0,0.8)',
 		width: 200,
 		height: 100,
 		justifyContent: 'center',
@@ -76,7 +71,7 @@ const styles = StyleSheet.create({
 	text: {
 		color: white,
 		fontFamily: Platform.OS === 'ios' ? 'Avenir' : 'Roboto',
-		fontSize: 18,
+		fontSize: 24,
 		alignSelf: 'center',
 
 		paddingVertical: 10

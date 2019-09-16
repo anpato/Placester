@@ -9,6 +9,9 @@ export const Input = ({
 	placeholderTextColor,
 	selectionColor,
 	value,
+	onSubmitEditing,
+	onFocus,
+	onBlur,
 	style
 }) => {
 	return (
@@ -17,11 +20,15 @@ export const Input = ({
 			spellCheck={false}
 			selectionColor={selectionColor}
 			placeholderTextColor={placeholderTextColor}
+			placeHolderStyle={{ color: 'blue' }}
 			style={[style, styles.input]}
 			secureTextEntry={secureTextEntry}
 			placeholder={placeholder}
 			onChangeText={onChangeText}
+			onBlur={onBlur}
 			value={value}
+			onSubmitEditing={onSubmitEditing}
+			onFocus={onFocus}
 		/>
 	)
 }
