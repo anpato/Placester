@@ -10,23 +10,24 @@ import {
 import { shadow, dark, white } from '../../../../styles/Colors'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { shadowStyle } from '../../../../styles/Styles'
+import { Platform } from '@unimodules/core'
 
 const CategoryList = ({ data }) => {
 	const renderItem = ({ _id, image_url, pluralName }) => {
 		return (
-			<TouchableOpacity style={styles.button}>
+			<TouchableOpacity style={[styles.button, shadowStyle]}>
 				<View style={[styles.card]}>
-					<ImageBackground
-						imageStyle={{
-							borderRadius: 20
-						}}
+					<Image
 						source={{ uri: image_url }}
 						style={{
-							width: '100%',
-							height: '100%'
-						}}>
+							borderRadius: 20,
+							width: styles.card.width,
+							height: styles.card.height
+						}}
+					/>
+					<View style={styles.overlay}>
 						<Text style={styles.text}>{pluralName}</Text>
-					</ImageBackground>
+					</View>
 				</View>
 			</TouchableOpacity>
 		)
@@ -51,23 +52,34 @@ const styles = StyleSheet.create({
 		paddingVertical: 10
 	},
 	card: {
-		borderRadius: 20,
 		width: 200,
 		height: 100,
+		borderRadius: 20,
+		justifyContent: 'flex-end',
 		alignItems: 'center'
 	},
 	button: {
+		alignItems: 'center',
 		marginHorizontal: 10,
 		borderRadius: 20,
-		justifyContent: 'center'
+		justifyContent: 'center',
+		alignItems: 'center'
+	},
+	overlay: {
+		position: 'absolute',
+		backgroundColor: 'rgba(0,0,0,0.5)',
+		width: 200,
+		height: 100,
+		justifyContent: 'center',
+		borderRadius: 20
 	},
 	text: {
 		color: white,
+		fontFamily: Platform.OS === 'ios' ? 'Avenir' : 'Roboto',
 		fontSize: 18,
-		backgroundColor: 'rgba(0,0,0,0.5)',
-		flex: 1,
-		alignSelf: 'stretch',
-		paddingBottom: 20
+		alignSelf: 'center',
+
+		paddingVertical: 10
 	}
 })
 
