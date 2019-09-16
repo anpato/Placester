@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, FlatList } from 'react-native'
+import { View, Text, StyleSheet, FlatList, ScrollView } from 'react-native'
 import { dark, background } from '../../../styles/Colors'
 import { getCategories } from '../../../services/ApiServices'
 import CategoryList from './components/CategoryList'
@@ -34,8 +34,14 @@ export default class HomeScreen extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
-				<Text>Home</Text>
-				{this.renderCategories()}
+				<ScrollView>
+					<View style={styles.top}>
+						{this.renderCategories()}
+						<View style={styles.bottom}>
+							<Text>Bottom</Text>
+						</View>
+					</View>
+				</ScrollView>
 			</View>
 		)
 	}
@@ -44,7 +50,12 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		backgroundColor: background,
-		justifyContent: 'center',
 		alignItems: 'center'
+	},
+	top: {
+		flex: 1
+	},
+	bottom: {
+		flex: 3
 	}
 })

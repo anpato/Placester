@@ -1,24 +1,40 @@
 import React from 'react'
-import { View, FlatList, Image, Text, StyleSheet } from 'react-native'
+import {
+	View,
+	FlatList,
+	Image,
+	Text,
+	StyleSheet,
+	ImageBackground
+} from 'react-native'
 import { shadow, dark, white } from '../../../../styles/Colors'
 import { TouchableOpacity } from 'react-native-gesture-handler'
-import { TouchableRipple } from 'react-native-paper'
 import { shadowStyle } from '../../../../styles/Styles'
 
 const CategoryList = ({ data }) => {
 	const renderItem = ({ _id, image_url, pluralName }) => {
 		return (
-			<View style={styles.card}>
-				<TouchableOpacity style={styles.button}>
-					<Image source={{ uri: image_url }} style={styles.image} />
-					<Text style={styles.text}>{pluralName}</Text>
-				</TouchableOpacity>
-			</View>
+			<TouchableOpacity style={styles.button}>
+				<View style={[styles.card]}>
+					<ImageBackground
+						imageStyle={{
+							borderRadius: 20
+						}}
+						source={{ uri: image_url }}
+						style={{
+							width: '100%',
+							height: '100%'
+						}}>
+						<Text style={styles.text}>{pluralName}</Text>
+					</ImageBackground>
+				</View>
+			</TouchableOpacity>
 		)
 	}
 	return (
-		<View>
+		<View style={styles.container}>
 			<FlatList
+				showsHorizontalScrollIndicator={false}
 				horizontal={true}
 				data={data}
 				keyExtractor={(item) => item._id}
@@ -29,27 +45,28 @@ const CategoryList = ({ data }) => {
 }
 
 const styles = StyleSheet.create({
-	card: {
+	container: {
 		alignSelf: 'stretch',
-		backgroundColor: dark,
-		borderRadius: 10,
-		alignItems: 'center',
-		marginHorizontal: 10,
-		padding: 20
+		marginTop: 10,
+		paddingVertical: 10
 	},
-	button: {
-		justifyContent: 'center',
+	card: {
+		borderRadius: 20,
+		width: 200,
+		height: 100,
 		alignItems: 'center'
 	},
-	image: {
+	button: {
+		marginHorizontal: 10,
 		borderRadius: 20,
-		height: 100,
-		width: 100
+		justifyContent: 'center'
 	},
 	text: {
 		color: white,
 		fontSize: 18,
-		backgroundColor: shadow,
+		backgroundColor: 'rgba(0,0,0,0.5)',
+		flex: 1,
+		alignSelf: 'stretch',
 		paddingBottom: 20
 	}
 })
