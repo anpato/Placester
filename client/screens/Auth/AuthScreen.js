@@ -13,7 +13,7 @@ import { shadowStyle } from '../../styles/Styles'
 import { Ionicons } from '@expo/vector-icons'
 import { Platform } from '@unimodules/core'
 import { loginUser } from '../../services/ApiServices'
-import { getUserId } from '../../services/config/Credentials'
+import FacebookLogin from './FacebookLogin'
 
 export default class AuthScreen extends Component {
 	constructor(props) {

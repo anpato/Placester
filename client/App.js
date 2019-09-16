@@ -6,7 +6,7 @@ import SignUpScreen from './screens/Auth/SignUpScreen'
 import ConfirmScreen from './screens/Auth/ConfirmScreen'
 import { Platform } from '@unimodules/core'
 import { dark, background, primary, primaryLight } from './styles/Colors'
-import HomeScreen from './screens/App/HomeScreen'
+import HomeScreen from './screens/App/Home/HomeScreen'
 import { createBottomTabNavigator } from 'react-navigation-tabs'
 import { Ionicons as IconComponent } from '@expo/vector-icons'
 import { TouchableOpacity } from 'react-native-gesture-handler'
@@ -87,7 +87,7 @@ const AppNavigator = createBottomTabNavigator(
 
 export default createAppContainer(
 	createSwitchNavigator({
-		// Auth: AuthStack,
+		// Auth: AuthStack
 		App: AppNavigator
 	})
 )
