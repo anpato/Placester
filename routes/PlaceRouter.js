@@ -6,11 +6,20 @@ PlaceRouter.get('/', async (req, res) => {
 	try {
 		const limit = 10
 		const page = req.query.page || 1
-		if (req.query.name || req.query.page) {
-			if (req.query.name) {
+		if (req.query.search || req.query.page) {
+			if (req.query.search) {
 				await Place.find().exec((err, data) => {
-					const place = data.filter((location) =>
-						location.name.toLowerCase().includes(req.query.name.toLowerCase())
+					const place = data.filter(
+						(item) =>
+							item.name
+								.toLowerCase()
+								.includes(req.query.search.toLowerCase()) ||
+							item.location.city
+								.toLowerCase()
+								.includes(req.query.search.toLowerCase()) ||
+							item.location.state
+								.toLowerCase()
+								.includes(req.query.search.toLowerCase())
 					)
 					if (place.length) res.send(place)
 					else
