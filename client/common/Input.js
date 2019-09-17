@@ -8,8 +8,8 @@ export const Input = ({
 	onChangeText,
 	placeholderTextColor,
 	selectionColor,
-	value,
 	onSubmitEditing,
+	onEndEditing,
 	onFocus,
 	onBlur,
 	style
@@ -26,8 +26,10 @@ export const Input = ({
 			placeholder={placeholder}
 			onChangeText={onChangeText}
 			onBlur={onBlur}
-			value={value}
 			onSubmitEditing={onSubmitEditing}
+			clearButtonMode="while-editing"
+			keyboardAppearance="dark"
+			onEndEditing={onEndEditing}
 			onFocus={onFocus}
 		/>
 	)

@@ -2,7 +2,7 @@ const express = require('express')
 const PlaceRouter = express.Router()
 const { Place, Category } = require('../database/Schema')
 
-PlaceRouter.get('/', async (req, res) => {
+PlaceRouter.get('/', async (req, res, next) => {
 	try {
 		const limit = 10
 		const page = req.query.page || 1
@@ -22,10 +22,13 @@ PlaceRouter.get('/', async (req, res) => {
 								.includes(req.query.search.toLowerCase())
 					)
 					if (place.length) res.send(place)
-					else
-						res
-							.status(400)
-							.send({ msg: `No place found with name of ${req.query.name}` })
+					else {
+						let err = new Error(
+							`No place found with name of ${req.query.search}`
+						)
+						err.status = 400
+						return next(err)
+					}
 				})
 			} else {
 				await Place.find()
@@ -42,7 +45,7 @@ PlaceRouter.get('/', async (req, res) => {
 			res.send(await Place.find())
 		}
 	} catch (error) {
-		throw error
+		res.json({ error: error })
 	}
 })
 

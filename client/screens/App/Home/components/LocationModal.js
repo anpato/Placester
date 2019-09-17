@@ -1,59 +1,128 @@
 import React from 'react'
-import { View, Text, Modal, StyleSheet, Dimensions } from 'react-native'
-import { FlatList, TouchableOpacity } from 'react-native-gesture-handler'
+import {
+	View,
+	Text,
+	Modal,
+	StyleSheet,
+	FlatList,
+	TouchableOpacity,
+	TouchableHighlight
+} from 'react-native'
 import Search from './Search'
-import { dark } from '../../../../styles/Colors'
-
+import { dark, primary, white, background } from '../../../../styles/Colors'
+import { Ionicons as IconComponent } from '@expo/vector-icons'
+import { Platform } from '@unimodules/core'
+import { shadowStyle } from '../../../../styles/Styles'
 const LocationModal = ({
 	data,
 	modalVisible,
 	onRequestClose,
 	onChangeText,
-	handleSubmit,
+	onSubmitEditing,
 	blurred,
 	handleBlur,
-	value
+	isError,
+	errorMsg,
+	value,
+	navigation
 }) => {
-	const renderItem = ({ item }) => console.log(item)
-	Dimensions
+	const renderItem = (item, index, separators) => {
+		return (
+			<TouchableHighlight
+				onPress={() => console.log(item._id)}
+				style={styles.itemButton}
+				underlayColor={background}
+				onShowUnderLay={separators.highlight}
+				onHideUnderLay={separators.unhighlight}>
+				<View style={styles.itemList}>
+					<Text style={[styles.itemText, styles.leftText]}>
+						{item.name.length > 20
+							? `${item.name.substr(0, 20)}...`
+							: item.name}
+					</Text>
+					<Text style={styles.itemText}>{item.location.city}</Text>
+				</View>
+			</TouchableHighlight>
+		)
+	}
 	return (
 		<Modal
-			style={styles.modal}
 			animationType="slide"
 			presentationStyle={styles.modal}
 			visible={modalVisible}
 			onRequestClose={onRequestClose}
 			transparent={false}>
-			<View style={styles.searchContainer}>
-				<TouchableOpacity onPress={onRequestClose}>
-					<Text>Close</Text>
-				</TouchableOpacity>
-				<Search
-					onChangeText={(text) => onChangeText('search', text)}
-					onFocus={handleBlur}
-					onBlur={handleBlur}
-					onSubmitEditing={handleSubmit}
-					value={value}
-					blurred={blurred}
-					inModal
+			<View style={styles.modal}>
+				<View style={[styles.searchContainer, shadowStyle]}>
+					<TouchableOpacity onPress={onRequestClose}>
+						<IconComponent
+							style={styles.iconStyle}
+							name={Platform.OS === 'ios' ? 'ios-close' : 'md-close'}
+							size={38}
+							color={primary}
+						/>
+					</TouchableOpacity>
+					<Search
+						onChangeText={(text) => onChangeText(text)}
+						onFocus={() => handleBlur(false)}
+						onBlur={() => handleBlur(true)}
+						onSubmitEditing={({ nativeEvent: text, eventCount, target }) =>
+							onSubmitEditing(text)
+						}
+						value={value}
+						blurred={blurred}
+						inModal={true}
+					/>
+				</View>
+				{isError ? (
+					<Text style={{ color: white, fontSize: 20, alignSelf: 'center' }}>
+						{errorMsg}
+					</Text>
+				) : null}
+				<FlatList
+					data={data}
+					keyExtractor={(item) => item._id}
+					renderItem={({ item, index, separators }) =>
+						renderItem(item, index, separators)
+					}
 				/>
 			</View>
-			<FlatList
-				data={data}
-				keyExtractor={(item) => item._id}
-				renderItem={({ item }) => renderItem(item)}
-			/>
 		</Modal>
 	)
 }
 
 const styles = StyleSheet.create({
 	modal: {
-		height: Dimensions.get('screen').height - 100,
-		backgroundColor: dark
+		backgroundColor: dark,
+		flex: 1
 	},
 	searchContainer: {
-		marginTop: 50
+		paddingTop: 10,
+		paddingBottom: 10,
+		backgroundColor: dark,
+		elevation: 1
+	},
+	iconStyle: {
+		alignSelf: 'flex-end',
+		marginRight: 20,
+		marginTop: 20
+	},
+	itemButton: {
+		alignSelf: 'stretch',
+		justifyContent: 'center'
+	},
+	itemList: {
+		paddingVertical: 10,
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'space-between',
+		borderBottomColor: background,
+		borderBottomWidth: 2
+	},
+	itemText: {
+		marginHorizontal: 10,
+		color: white,
+		fontSize: 18
 	}
 })
 

@@ -13,9 +13,9 @@ import { Platform } from '@unimodules/core'
 const Search = ({
 	blurred,
 	onChangeText,
-	handleSubmit,
+	onSubmitEditing,
+	onEndEditing,
 	handleBlur,
-	searchQuery,
 	inModal
 }) => {
 	return (
@@ -25,17 +25,20 @@ const Search = ({
 				<Input
 					placeholder="Search"
 					style={
-						!blurred
+						(blurred
 							? [styles.input, styles.inputInactive]
-							: [styles.input, styles.inputActive]
+							: [styles.input, styles.inputActive],
+						inModal
+							? [styles.input, styles.inputActive]
+							: [styles.input, styles.inputInactive])
 					}
-					value={searchQuery}
 					placeholderTextColor={primaryLight}
 					selectionColor={inModal ? secondary : white}
-					onChangeText={(text) => onChangeText('search', text)}
+					onChangeText={onChangeText}
 					onFocus={handleBlur}
+					onEndEditing={onEndEditing}
+					onSubmitEditing={onSubmitEditing}
 					onBlur={handleBlur}
-					onSubmitEditing={handleSubmit}
 				/>
 			</View>
 		</View>

@@ -6,11 +6,12 @@ import {
 	ScrollView,
 	LayoutAnimation
 } from 'react-native'
-import { background } from '../../../styles/Colors'
+import { background, secondary, primary } from '../../../styles/Colors'
 import { getCategories, searchPlaces } from '../../../services/ApiServices'
 import CategoryList from './components/CategoryList'
-import Search from './components/Search'
 import LocationModal from './components/LocationModal'
+import { TouchableOpacity } from 'react-native-gesture-handler'
+import { Platform } from '@unimodules/core'
 
 export default class HomeScreen extends Component {
 	constructor(props) {
@@ -18,9 +19,11 @@ export default class HomeScreen extends Component {
 		this.state = {
 			categories: [],
 			isLoading: false,
-			blurred: false,
+			blurred: true,
 			modalVisible: false,
 			searchResults: [],
+			errorMsg: '',
+			isError: false,
 			search: ''
 		}
 	}
@@ -39,7 +42,7 @@ export default class HomeScreen extends Component {
 			const categories = await getCategories()
 			this.setState({ categories, isLoading: false })
 		} catch (error) {
-			console.log(error)
+			throw error
 		}
 	}
 
@@ -52,48 +55,54 @@ export default class HomeScreen extends Component {
 	handleModalClose = () =>
 		this.setState({ modalVisible: false, searchResults: [] })
 
-	handleBlur = () => {
-		this.setState({ blurred: !this.state.blurred })
-		if (!this.state.blurred) this.setState({ modalVisible: true })
-	}
+	handleModal = () => this.setState({ modalVisible: !this.state.modalVisible })
 
-	handleChange = (query, value) =>
-		this.setState({ [query]: value, blurred: false })
+	handleChange = (search) =>
+		this.setState({ search, blurred: false, isError: false, errorMsg: '' })
 
 	handleSubmit = async () => {
-		const { search } = this.state
 		try {
-			const searchResults = await searchPlaces(search)
-			this.setState({ modalVisible: true, searchResults })
+			const searchResults = await searchPlaces(this.state.search)
+			this.setState({ searchResults })
 		} catch (error) {
-			console.log(error)
+			this.setState({
+				isError: true,
+				errorMsg: 'Could not find a place with that name.'
+			})
 		}
 	}
 
 	render() {
-		const { blurred, search } = this.state
+		const { blurred } = this.state
 		return (
 			<View style={styles.container}>
 				<ScrollView>
 					<View style={styles.top}>
 						<View style={styles.headerContainer}>
-							<Search
-								onChangeText={this.handleChange}
-								handleSubmit={this.handleSubmit}
-								blurred={blurred}
-								handleBlur={this.handleBlur}
-								value={this.state.search}
-							/>
+							<View style={styles.title}>
+								<Text style={styles.titleText}>Search For Places</Text>
+								<View style={styles.space}>
+									<TouchableOpacity
+										style={styles.button}
+										onPress={this.handleModal}>
+										<Text style={styles.buttonText}>Search</Text>
+									</TouchableOpacity>
+								</View>
+							</View>
 						</View>
 						<LocationModal
 							data={this.state.searchResults}
 							modalVisible={this.state.modalVisible}
 							onRequestClose={this.handleModalClose}
 							onChangeText={this.handleChange}
-							handleSubmit={this.handleSubmit}
+							onSubmitEditing={({ nativeEvent: text }) =>
+								this.handleSubmit(text)
+							}
+							isError={this.state.isError}
+							errorMsg={this.state.errorMsg}
+							onEndEditing={this.handleSubmit}
 							blurred={blurred}
 							handleBlur={this.handleBlur}
-							value={this.state.search}
 						/>
 						{this.renderCategories()}
 						<View style={styles.bottom}>
@@ -115,11 +124,35 @@ const styles = StyleSheet.create({
 		flexDirection: 'column',
 		marginTop: 50
 	},
-
 	top: {
 		flex: 1
 	},
 	bottom: {
 		flex: 3
+	},
+	title: {
+		flexDirection: 'row'
+	},
+	titleText: {
+		fontSize: 24,
+		flex: 1,
+		marginHorizontal: 10,
+		marginTop: 10,
+		color: secondary,
+		fontFamily: Platform.OS === 'ios' ? 'Avenir-Heavy' : 'Roboto'
+	},
+	space: {
+		flex: 2
+	},
+	button: {
+		borderBottomColor: primary,
+		borderBottomWidth: 2,
+		marginTop: 10,
+		marginHorizontal: 20,
+		paddingVertical: 10
+	},
+	buttonText: {
+		fontSize: 18,
+		color: primary
 	}
 })
