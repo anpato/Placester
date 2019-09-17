@@ -1,7 +1,7 @@
 import Axios from 'axios'
 import { setUser, getUserId, getToken } from './config/Credentials'
 import { CLIENT_SECRET, CLIENT_ID } from 'react-native-dotenv'
-const BASE_URL = 'http://172.16.4.219:3001'
+const BASE_URL = 'http:///192.168.1.6:3001'
 const JwtToken = 'token'
 
 const Api = Axios.create({
@@ -34,6 +34,15 @@ export const signUpUser = async (data) => {
 export const getCategories = async () => {
 	try {
 		const resp = await Api.get('/categories')
+		return resp.data
+	} catch (error) {
+		throw error
+	}
+}
+
+export const searchPlaces = async (query) => {
+	try {
+		const resp = await Api.get(`/places?search=${query}`)
 		return resp.data
 	} catch (error) {
 		throw error

@@ -6,18 +6,11 @@ import {
 	ScrollView,
 	LayoutAnimation
 } from 'react-native'
-import {
-	dark,
-	background,
-	primary,
-	white,
-	primaryLight,
-	secondary
-} from '../../../styles/Colors'
-import { getCategories } from '../../../services/ApiServices'
-import { Input } from '../../../common/index'
+import { background } from '../../../styles/Colors'
+import { getCategories, searchPlaces } from '../../../services/ApiServices'
 import CategoryList from './components/CategoryList'
-import { Platform } from '@unimodules/core'
+import Search from './components/Search'
+import LocationModal from './components/LocationModal'
 
 export default class HomeScreen extends Component {
 	constructor(props) {
@@ -26,6 +19,8 @@ export default class HomeScreen extends Component {
 			categories: [],
 			isLoading: false,
 			blurred: false,
+			modalVisible: false,
+			searchResults: [],
 			search: ''
 		}
 	}
@@ -54,8 +49,25 @@ export default class HomeScreen extends Component {
 		}
 	}
 
+	handleModalClose = () =>
+		this.setState({ modalVisible: false, searchResults: [] })
+
 	handleBlur = () => {
 		this.setState({ blurred: !this.state.blurred })
+		if (!this.state.blurred) this.setState({ modalVisible: true })
+	}
+
+	handleChange = (query, value) =>
+		this.setState({ [query]: value, blurred: false })
+
+	handleSubmit = async () => {
+		const { search } = this.state
+		try {
+			const searchResults = await searchPlaces(search)
+			this.setState({ modalVisible: true, searchResults })
+		} catch (error) {
+			console.log(error)
+		}
 	}
 
 	render() {
@@ -65,29 +77,24 @@ export default class HomeScreen extends Component {
 				<ScrollView>
 					<View style={styles.top}>
 						<View style={styles.headerContainer}>
-							<View style={styles.title}>
-								<Text style={styles.titleText}>Search For Places</Text>
-								<View style={styles.space}>
-									<Input
-										placeholder="Search"
-										style={
-											!blurred
-												? [styles.input, styles.inputInactive]
-												: [styles.input, styles.inputActive]
-										}
-										pla
-										placeholderTextColor={primaryLight}
-										selectionColor={white}
-										onChangeText={(text) => this.setState({ search: text })}
-										onFocus={this.handleBlur}
-										onBlur={this.handleBlur}
-										onSubmitEditing={(text) =>
-											console.log(text.nativeEvent.text)
-										}
-									/>
-								</View>
-							</View>
+							<Search
+								onChangeText={this.handleChange}
+								handleSubmit={this.handleSubmit}
+								blurred={blurred}
+								handleBlur={this.handleBlur}
+								value={this.state.search}
+							/>
 						</View>
+						<LocationModal
+							data={this.state.searchResults}
+							modalVisible={this.state.modalVisible}
+							onRequestClose={this.handleModalClose}
+							onChangeText={this.handleChange}
+							handleSubmit={this.handleSubmit}
+							blurred={blurred}
+							handleBlur={this.handleBlur}
+							value={this.state.search}
+						/>
 						{this.renderCategories()}
 						<View style={styles.bottom}>
 							<Text>Bottom</Text>
@@ -108,34 +115,7 @@ const styles = StyleSheet.create({
 		flexDirection: 'column',
 		marginTop: 50
 	},
-	title: {
-		flexDirection: 'row'
-	},
-	titleText: {
-		fontSize: 24,
-		flex: 1,
-		marginHorizontal: 10,
-		marginTop: 10,
-		color: secondary,
-		fontFamily: Platform.OS === 'ios' ? 'Avenir-Heavy' : 'Roboto'
-	},
-	space: {
-		flex: 2
-	},
-	inputActive: {
-		borderBottomColor: primary
-	},
-	inputInactive: {
-		borderBottomColor: dark
-	},
-	input: {
-		borderBottomWidth: 2,
-		marginTop: 10,
-		marginHorizontal: 20,
-		paddingVertical: 10,
-		fontSize: 18,
-		color: white
-	},
+
 	top: {
 		flex: 1
 	},
