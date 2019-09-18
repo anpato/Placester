@@ -2,7 +2,7 @@ const express = require('express')
 const PlaceRouter = express.Router()
 const { Place, Category } = require('../database/Schema')
 
-PlaceRouter.get('/', async (req, res) => {
+PlaceRouter.get('/', async (req, res, next) => {
 	try {
 		const limit = 10
 		const page = req.query.page || 1
@@ -63,7 +63,7 @@ PlaceRouter.get('/', async (req, res) => {
 			res.send(await Place.find())
 		}
 	} catch (error) {
-		throw error
+		res.json({ error: error })
 	}
 })
 
