@@ -1,14 +1,13 @@
 import React from 'react'
-import { View, FlatList, StyleSheet } from 'react-native'
-
+import { View, FlatList, StyleSheet, Dimensions } from 'react-native'
 import ListButton from './ListButton'
 
-const CategoryList = ({ data }) => {
-	const renderItem = ({ _id, image_url, pluralName }) => {
+const NearbyPlaces = ({ data }) => {
+	const renderItem = ({ _id, image_url, name }) => {
 		return (
 			<ListButton
 				image_url={image_url}
-				name={pluralName}
+				name={name}
 				imageStyle={{
 					width: styles.card.width,
 					height: styles.card.height
@@ -21,8 +20,8 @@ const CategoryList = ({ data }) => {
 	return (
 		<View style={styles.container}>
 			<FlatList
-				showsHorizontalScrollIndicator={false}
-				horizontal={true}
+				showsVerticalScrollIndicator={false}
+				initialNumToRender={10}
 				data={data}
 				keyExtractor={(item) => item._id}
 				renderItem={({ item }) => renderItem(item)}
@@ -38,10 +37,12 @@ const styles = StyleSheet.create({
 		paddingVertical: 10
 	},
 	card: {
-		width: 200,
-		height: 100,
+		margin: 10,
+		alignSelf: 'stretch',
+		width: 'auto',
+		height: 200,
 		borderRadius: 20
 	}
 })
 
-export default CategoryList
+export default NearbyPlaces

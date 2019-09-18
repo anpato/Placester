@@ -7,16 +7,26 @@ import {
 	LayoutAnimation
 } from 'react-native'
 import { background, secondary, primary } from '../../../styles/Colors'
-import { getCategories, searchPlaces } from '../../../services/ApiServices'
+import {
+	getCategories,
+	searchPlaces,
+	getPlacesNearby
+} from '../../../services/ApiServices'
 import CategoryList from './components/CategoryList'
 import LocationModal from './components/LocationModal'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { Platform } from '@unimodules/core'
+import NearbyPlaces from './components/NearbyPlaces'
 
 export default class HomeScreen extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
+			location: {
+				lat: null,
+				lng: null
+			},
+			nearbyPlaces: [],
 			categories: [],
 			isLoading: false,
 			blurred: true,
@@ -33,9 +43,37 @@ export default class HomeScreen extends Component {
 	}
 
 	async componentDidMount() {
+		this.setState({ isLoading: true })
+		this.getCurrentLocation()
 		await this.fetchCategories()
+		await this.fetchNearbyPlaces()
+		this.setState({ isLoading: false })
 	}
 
+	fetchNearbyPlaces = async () => {
+		const { lat, lng } = this.state.location
+		try {
+			const nearbyPlaces = await getPlacesNearby({ lat, lng })
+			this.setState({ nearbyPlaces })
+		} catch (error) {
+			console.log(error)
+		}
+	}
+
+	getCurrentLocation = () =>
+		navigator.geolocation.getCurrentPosition(
+			(position) => {
+				this.setState({
+					location: {
+						...this.state.location,
+						lat: position.coords.latitude,
+						lng: position.coords.longitude
+					}
+				})
+			},
+			(error) => console.log(error),
+			{ enableHighAccuracy: true, timeout: 10000 }
+		)
 	fetchCategories = async () => {
 		try {
 			this.setState({ isLoading: true })
@@ -106,7 +144,12 @@ export default class HomeScreen extends Component {
 						/>
 						{this.renderCategories()}
 						<View style={styles.bottom}>
-							<Text>Bottom</Text>
+							<View style={styles.bottomHeader}>
+								<Text style={styles.titleText}>Places Nearby</Text>
+							</View>
+							<View style={{ justifyContent: 'center' }}>
+								<NearbyPlaces data={this.state.nearbyPlaces} />
+							</View>
 						</View>
 					</View>
 				</ScrollView>
@@ -129,6 +172,9 @@ const styles = StyleSheet.create({
 	},
 	bottom: {
 		flex: 3
+	},
+	bottomHeader: {
+		alignItems: 'flex-end'
 	},
 	title: {
 		flexDirection: 'row'
