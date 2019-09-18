@@ -61,34 +61,34 @@ export const searchPlaces = async (query) => {
 }
 
 const getFourSquarePlaces = async (coords) => {
-	try {
-		const resp = await FourSquare.get(
-			`/search?client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&ll=${coords.lat},
+	const resp = await FourSquare.get(
+		`/search?client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&ll=${coords.lat},
 			${coords.lng}&v=${date}`
-		)
-		if (resp) {
-			const data = resp.data.response.venues.map((place, index) => {
-				const places = {
-					name: place.name,
-					location: { lat: place.location.lat, lng: place.location.lng },
+	)
+	if (resp) {
+		const data = resp.data.response.venues.map((place, index) => {
+			const places = {
+				name: place.name,
+				location: {
+					lat: place.location.lat,
+					lng: place.location.lng,
 					city: place.location.city,
 					state: place.location.state,
 					cc: place.location.cc
 				}
-				return places
-			})
-			await Api.post('/places/populate', data)
-		}
-	} catch (error) {
-		throw error
+			}
+			return places
+		})
+		await Api.post('/places/populate', data)
 	}
+	return true
 }
 
 export const getPlacesNearby = async (coords) => {
 	try {
-		await getFourSquarePlaces(coords)
+		// await getFourSquarePlaces(coords)
 		const resp = await Api.get(`/places/?lat=${coords.lat}&lng=${coords.lng}`)
-		return resp.data
+		return resp.data.splice(0, 10)
 	} catch (error) {
 		throw error
 	}
