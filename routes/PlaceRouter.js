@@ -6,7 +6,8 @@ PlaceRouter.get('/', async (req, res, next) => {
 	try {
 		const limit = 10
 		const page = req.query.page || 1
-		if (req.query.search || req.query.page) {
+		const location = { lat: req.query.lat, lng: req.query.lng }
+		if (req.query.search || req.query.page || (location.lat && location.lng)) {
 			if (req.query.search) {
 				await Place.find().exec((err, data) => {
 					const place = data.filter(
@@ -26,6 +27,23 @@ PlaceRouter.get('/', async (req, res, next) => {
 						let err = new Error(
 							`No place found with name of ${req.query.search}`
 						)
+						err.status = 400
+						return next(err)
+					}
+				})
+			}
+			if (location.lat && location.lng) {
+				await Place.find().exec((err, data) => {
+					const places = data.filter(
+						(place) =>
+							(place.location.lat >= parseFloat(location.lat) + 0.2 &&
+								place.location.lng >= parseFloat(location.lng) + 0.2) ||
+							(place.location.lat <= parseFloat(location.lat) - 0.2 &&
+								place.location.lng <= parseFloat(location.lng) + 0.2)
+					)
+					if (places.length) res.send(places)
+					else {
+						let err = new Error(`No places found nearby.`)
 						err.status = 400
 						return next(err)
 					}
