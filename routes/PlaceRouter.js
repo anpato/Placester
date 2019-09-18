@@ -117,4 +117,19 @@ PlaceRouter.delete('/:place_id', async (req, res) => {
 	}
 })
 
+PlaceRouter.post('/populate', async (req, res) => {
+	try {
+		await Place.find().exec(async (err, data) => {
+			const incomingData = req.body.filter(
+				(locations) => locations.name !== data.name
+			)
+			await Place.collection.insertMany(incomingData, (err, docs) =>
+				res.send(incomingData)
+			)
+		})
+	} catch (error) {
+		throw error
+	}
+})
+
 module.exports = PlaceRouter
