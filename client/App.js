@@ -12,6 +12,8 @@ import { Ionicons as IconComponent } from '@expo/vector-icons'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import ProfileScreen from './screens/App/ProfileScreen'
 import PlaceUpload from './screens/App/AddPlace/PlaceUpload'
+import CameraPage from './screens/App/AddPlace/CameraPage'
+import { FloatingAction } from './common'
 
 const AuthStack = createStackNavigator(
 	{
@@ -49,9 +51,10 @@ const HomeStack = createStackNavigator(
 
 const UploadStack = createStackNavigator({
 	Camera: {
-		screen: PlaceUpload,
+		screen: CameraPage,
 		navigationOptions: {
-			header: null
+			header: null,
+			tabBarVisible: false
 		}
 	}
 })
@@ -59,7 +62,25 @@ const UploadStack = createStackNavigator({
 const AppNavigator = createBottomTabNavigator(
 	{
 		Main: HomeStack,
-		Upload: UploadStack,
+		Upload: {
+			screen: UploadStack,
+			navigationOptions: ({ navigation }) => ({
+				tabBarIcon: ({ focused }) => (
+					<FloatingAction onPress={() => navigation.navigate('Upload')}>
+						<IconComponent
+							name={
+								Platform.OS === 'ios'
+									? `ios-camera${focused ? '' : ''}`
+									: `md-camera${focused ? '' : ''}`
+							}
+							color={dark}
+							size={32}
+						/>
+					</FloatingAction>
+				),
+				tabBarVisible: false
+			})
+		},
 		Account: ProfileScreen
 	},
 	{
@@ -73,12 +94,6 @@ const AppNavigator = createBottomTabNavigator(
 							Platform.OS === 'ios'
 								? `ios-home${focused ? '' : ''}`
 								: `md-home${focused ? '' : ''}`
-						break
-					case 'Upload':
-						iconName =
-							Platform.OS === 'ios'
-								? `ios-camera${focused ? '' : ''}`
-								: `md-camera${focused ? '' : ''}`
 						break
 					case 'Account':
 						iconName =
