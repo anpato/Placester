@@ -5,12 +5,13 @@ import { createAppContainer, createSwitchNavigator } from 'react-navigation'
 import SignUpScreen from './screens/Auth/SignUpScreen'
 import ConfirmScreen from './screens/Auth/ConfirmScreen'
 import { Platform } from '@unimodules/core'
-import { dark, background, primary, primaryLight } from './styles/Colors'
+import { dark, primary, primaryLight } from './styles/Colors'
 import HomeScreen from './screens/App/Home/HomeScreen'
 import { createBottomTabNavigator } from 'react-navigation-tabs'
 import { Ionicons as IconComponent } from '@expo/vector-icons'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import ProfileScreen from './screens/App/ProfileScreen'
+import PlaceUpload from './screens/App/AddPlace/PlaceUpload'
 
 const AuthStack = createStackNavigator(
 	{
@@ -28,7 +29,7 @@ const AuthStack = createStackNavigator(
 	}
 )
 
-const AppStack = createStackNavigator(
+const HomeStack = createStackNavigator(
 	{
 		Home: {
 			screen: HomeScreen,
@@ -46,9 +47,19 @@ const AppStack = createStackNavigator(
 	}
 )
 
+const UploadStack = createStackNavigator({
+	Camera: {
+		screen: PlaceUpload,
+		navigationOptions: {
+			header: null
+		}
+	}
+})
+
 const AppNavigator = createBottomTabNavigator(
 	{
-		Main: AppStack,
+		Main: HomeStack,
+		Upload: UploadStack,
 		Account: ProfileScreen
 	},
 	{
@@ -62,6 +73,12 @@ const AppNavigator = createBottomTabNavigator(
 							Platform.OS === 'ios'
 								? `ios-home${focused ? '' : ''}`
 								: `md-home${focused ? '' : ''}`
+						break
+					case 'Upload':
+						iconName =
+							Platform.OS === 'ios'
+								? `ios-camera${focused ? '' : ''}`
+								: `md-camera${focused ? '' : ''}`
 						break
 					case 'Account':
 						iconName =

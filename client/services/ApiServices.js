@@ -1,7 +1,7 @@
 import Axios from 'axios'
 import { setUser, getUserId, getToken } from './config/Credentials'
 import { CLIENT_SECRET, CLIENT_ID } from 'react-native-dotenv'
-const BASE_URL = 'http://192.168.1.6:3001'
+const BASE_URL = 'http://192.168.1.251:3001'
 const JwtToken = 'token'
 const today = new Date()
 let dd = today.getDate()
