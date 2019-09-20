@@ -2,6 +2,8 @@ const express = require('express')
 const authRouter = express.Router()
 const { User, Friend, Favorite } = require('../database/schema')
 const { passport, signToken } = require('../auth/auth')
+const bcrypt = require('bcrypt')
+const SaltFactor = parseInt(process.env.SALT_FACTOR)
 
 authRouter.post('/login', async (req, res, next) => {
 	passport.authenticate('login', async (err, user, info) => {
@@ -68,6 +70,44 @@ authRouter.delete('/:user_id', async (req, res) => {
 		})
 		await Friend.deleteMany({ friend_id: req.params.user_id })
 		res.send({ msg: 'Account Deleted!' })
+	} catch (error) {
+		throw error
+	}
+})
+
+authRouter.get('/:user_id', async (req, res) => {
+	try {
+		await User.findById(req.params.user_id).exec((err, data) => {
+			const {
+				username,
+				email,
+				name: { first },
+				profile_image
+			} = data
+			if (err) res.send({ error: err })
+			else {
+				const userInfo = { username, first, email, profile_image }
+				res.send(userInfo)
+			}
+		})
+	} catch (error) {
+		throw error
+	}
+})
+
+authRouter.put('/:user_id', async (req, res) => {
+	try {
+		const user = await User.findById(req.params.user_id)
+		if (req.body.password) {
+			const body = req.body
+			const password = bcrypt.hashSync(req.body.password, SaltFactor)
+			const updatedUser = await user.update({ body, password })
+			await updatedUser.save()
+			res.send(updatedUser)
+		} else {
+			await user.updateOne(req.body)
+			res.send({ msg: 'Account updated successfully' })
+		}
 	} catch (error) {
 		throw error
 	}
