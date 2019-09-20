@@ -74,9 +74,6 @@ AuthRouter.delete('/:user_id', async (req, res) => {
 	}
 })
 
-<<<<<<< HEAD
-module.exports = AuthRouter
-=======
 authRouter.get('/:user_id', async (req, res) => {
 	try {
 		await User.findById(req.params.user_id).exec((err, data) => {
@@ -116,4 +113,3 @@ authRouter.put('/:user_id', async (req, res) => {
 })
 
 module.exports = authRouter
->>>>>>> develop
