@@ -5,15 +5,19 @@ import { createAppContainer, createSwitchNavigator } from 'react-navigation'
 import SignUpScreen from './screens/Auth/SignUpScreen'
 import ConfirmScreen from './screens/Auth/ConfirmScreen'
 import { Platform } from '@unimodules/core'
-import { dark, background, primary, primaryLight } from './styles/Colors'
+import { dark, primary, primaryLight } from './styles/Colors'
 import HomeScreen from './screens/App/Home/HomeScreen'
 import { createBottomTabNavigator } from 'react-navigation-tabs'
 import { Ionicons as IconComponent } from '@expo/vector-icons'
 import { TouchableOpacity } from 'react-native-gesture-handler'
-import ProfileScreen from './screens/App/ProfileScreen'
+import ProfileScreen from './screens/App/Account/ProfileScreen'
+import CameraPage from './screens/App/AddPlace/CameraPage'
+import { FloatingAction } from './common'
+import SplashScreen from './screens/Auth/Splash'
 
 const AuthStack = createStackNavigator(
 	{
+		Splash: SplashScreen,
 		SignIn: AuthScreen,
 		SignUp: SignUpScreen,
 		Confirm: ConfirmScreen
@@ -28,7 +32,7 @@ const AuthStack = createStackNavigator(
 	}
 )
 
-const AppStack = createStackNavigator(
+const HomeStack = createStackNavigator(
 	{
 		Home: {
 			screen: HomeScreen,
@@ -46,9 +50,38 @@ const AppStack = createStackNavigator(
 	}
 )
 
+const UploadStack = createStackNavigator({
+	Camera: {
+		screen: CameraPage,
+		navigationOptions: {
+			header: null,
+			tabBarVisible: false
+		}
+	}
+})
+
 const AppNavigator = createBottomTabNavigator(
 	{
-		Main: AppStack,
+		Main: HomeStack,
+		Upload: {
+			screen: UploadStack,
+			navigationOptions: ({ navigation }) => ({
+				tabBarIcon: ({ focused }) => (
+					<FloatingAction>
+						<IconComponent
+							name={
+								Platform.OS === 'ios'
+									? `ios-add${focused ? '' : ''}`
+									: `md-add${focused ? '' : ''}`
+							}
+							color={dark}
+							size={32}
+						/>
+					</FloatingAction>
+				),
+				tabBarVisible: false
+			})
+		},
 		Account: ProfileScreen
 	},
 	{
@@ -83,16 +116,17 @@ const AppNavigator = createBottomTabNavigator(
 			inactiveTintColor: primaryLight,
 
 			style: {
-				backgroundColor: dark
+				backgroundColor: dark,
+				borderTopColor: 'transparent'
 			}
 		},
-		initialRouteName: 'Main'
+		initialRouteName: 'Account'
 	}
 )
 
 export default createAppContainer(
 	createSwitchNavigator({
-		// Auth: AuthStack,
+		Auth: AuthStack,
 		App: AppNavigator
 	})
 )

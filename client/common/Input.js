@@ -30,6 +30,7 @@ export const Input = ({
 			clearButtonMode="while-editing"
 			keyboardAppearance="dark"
 			onEndEditing={onEndEditing}
+			enablesReturnKeyAutomatically
 			onFocus={onFocus}
 		/>
 	)

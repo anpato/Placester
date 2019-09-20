@@ -1,4 +1,7 @@
 import { AsyncStorage } from 'react-native'
+import { uploadFile } from 'react-s3'
+import { awsConfig } from './AwsConfig'
+import { DIRNAME } from 'react-native-dotenv'
 
 export const setUser = async (userId, token) => {
 	try {
@@ -16,12 +19,9 @@ export const getToken = async () => {
 		const token = await AsyncStorage.getItem('user_token')
 		if (token) {
 			return token
-		} else {
-			let err = new Error('No Token')
-			return err
 		}
 	} catch (error) {
-		console.log(error)
+		throw error
 	}
 }
 
@@ -41,3 +41,8 @@ export const logOut = async () => {
 		console.log(error)
 	}
 }
+
+export const uploadProfileImage = (file) =>
+	uploadFile(file, awsConfig(DIRNAME))
+		.then((data) => data.location)
+		.catch((err) => err.toString())

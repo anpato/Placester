@@ -4,7 +4,9 @@ import {
 	Text,
 	StyleSheet,
 	ScrollView,
-	LayoutAnimation
+	LayoutAnimation,
+	RefreshControl,
+	SafeAreaView
 } from 'react-native'
 import { background, secondary, primary } from '../../../styles/Colors'
 import {
@@ -17,6 +19,7 @@ import LocationModal from './components/LocationModal'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { Platform } from '@unimodules/core'
 import NearbyPlaces from './components/NearbyPlaces'
+import { Spinner } from '../../../common'
 
 export default class HomeScreen extends Component {
 	constructor(props) {
@@ -34,7 +37,8 @@ export default class HomeScreen extends Component {
 			searchResults: [],
 			errorMsg: '',
 			isError: false,
-			search: ''
+			search: '',
+			refreshing: false
 		}
 	}
 
@@ -44,10 +48,8 @@ export default class HomeScreen extends Component {
 
 	async componentDidMount() {
 		this.setState({ isLoading: true })
-		this.getCurrentLocation()
+		await this.getCurrentLocation()
 		await this.fetchCategories()
-		await this.fetchNearbyPlaces()
-		this.setState({ isLoading: false })
 	}
 
 	fetchNearbyPlaces = async () => {
@@ -55,30 +57,42 @@ export default class HomeScreen extends Component {
 		try {
 			const nearbyPlaces = await getPlacesNearby({ lat, lng })
 			this.setState({ nearbyPlaces })
+			this.setState({ isLoading: false })
 		} catch (error) {
-			console.log(error)
+			// console.log(error)
 		}
 	}
 
-	getCurrentLocation = () =>
+	handleRefresh = async () => {
+		this.setState({ refreshing: true })
+		try {
+			await this.fetchNearbyPlaces()
+			this.setState({ refreshing: false })
+		} catch (error) {
+			this.setState({ refreshing: false })
+		}
+	}
+
+	getCurrentLocation = async () =>
 		navigator.geolocation.getCurrentPosition(
 			(position) => {
-				this.setState({
-					location: {
-						...this.state.location,
-						lat: position.coords.latitude,
-						lng: position.coords.longitude
-					}
-				})
+				this.setState(
+					{
+						location: {
+							...this.state.location,
+							lat: position.coords.latitude,
+							lng: position.coords.longitude
+						}
+					},
+					async () => await this.fetchNearbyPlaces()
+				)
 			},
-			(error) => console.log(error),
-			{ enableHighAccuracy: true, timeout: 10000 }
+			(error) => console.log(error)
 		)
 	fetchCategories = async () => {
 		try {
-			this.setState({ isLoading: true })
 			const categories = await getCategories()
-			this.setState({ categories, isLoading: false })
+			this.setState({ categories })
 		} catch (error) {
 			throw error
 		}
@@ -95,13 +109,21 @@ export default class HomeScreen extends Component {
 
 	handleModal = () => this.setState({ modalVisible: !this.state.modalVisible })
 
-	handleChange = (search) =>
-		this.setState({ search, blurred: false, isError: false, errorMsg: '' })
+	handleChange = (search) => {
+		if (search.length < 1) {
+		} else {
+			this.setState({ search, blurred: false, isError: false, errorMsg: '' })
+		}
+	}
 
 	handleSubmit = async () => {
 		try {
-			const searchResults = await searchPlaces(this.state.search)
-			this.setState({ searchResults })
+			if (this.state.search.length < 1)
+				this.setState({ isError: true, errorMsg: 'Field Cannot Be Empty' })
+			else {
+				const searchResults = await searchPlaces(this.state.search)
+				this.setState({ searchResults })
+			}
 		} catch (error) {
 			this.setState({
 				isError: true,
@@ -112,60 +134,84 @@ export default class HomeScreen extends Component {
 
 	render() {
 		const { blurred } = this.state
-		return (
-			<View style={styles.container}>
-				<ScrollView>
-					<View style={styles.top}>
-						<View style={styles.headerContainer}>
-							<View style={styles.title}>
-								<Text style={styles.titleText}>Search For Places</Text>
-								<View style={styles.space}>
-									<TouchableOpacity
-										style={styles.button}
-										onPress={this.handleModal}>
-										<Text style={styles.buttonText}>Search</Text>
-									</TouchableOpacity>
+		if (this.state.isLoading) {
+			return (
+				<SafeAreaView
+					style={[
+						styles.container,
+						{ justifyContent: 'center', alignItems: 'center' }
+					]}>
+					<Spinner size="large" color={primary} />
+				</SafeAreaView>
+			)
+		} else {
+			return (
+				<SafeAreaView style={styles.container}>
+					<ScrollView
+						contentContainerStyle={{
+							paddingBottom: Platform.OS === 'android' ? 50 : 0,
+							marginTop: Platform.OS === 'android' ? 50 : 0
+						}}
+						showsVerticalScrollIndicator={false}
+						refreshControl={
+							<RefreshControl
+								refreshing={this.state.refreshing}
+								onRefresh={this.handleRefresh}
+								tintColor={primary}
+							/>
+						}>
+						<View style={styles.top}>
+							<View style={styles.headerContainer}>
+								<View style={styles.title}>
+									<Text style={styles.titleText}>Search For Places</Text>
+									<View style={styles.space}>
+										<TouchableOpacity
+											style={styles.button}
+											onPress={this.handleModal}>
+											<Text style={styles.buttonText}>Search</Text>
+										</TouchableOpacity>
+									</View>
+								</View>
+							</View>
+							<LocationModal
+								data={this.state.searchResults}
+								modalVisible={this.state.modalVisible}
+								onRequestClose={this.handleModalClose}
+								onChangeText={this.handleChange}
+								onSubmitEditing={({ nativeEvent: text }) =>
+									this.handleSubmit(text)
+								}
+								isError={this.state.isError}
+								errorMsg={this.state.errorMsg}
+								onEndEditing={this.handleSubmit}
+								blurred={blurred}
+								handleBlur={this.handleBlur}
+							/>
+							{this.renderCategories()}
+							<View style={styles.bottom}>
+								<View style={styles.bottomHeader}>
+									<Text style={styles.titleText}>Places Nearby</Text>
+								</View>
+								<View style={{ justifyContent: 'center' }}>
+									<NearbyPlaces data={this.state.nearbyPlaces} />
 								</View>
 							</View>
 						</View>
-						<LocationModal
-							data={this.state.searchResults}
-							modalVisible={this.state.modalVisible}
-							onRequestClose={this.handleModalClose}
-							onChangeText={this.handleChange}
-							onSubmitEditing={({ nativeEvent: text }) =>
-								this.handleSubmit(text)
-							}
-							isError={this.state.isError}
-							errorMsg={this.state.errorMsg}
-							onEndEditing={this.handleSubmit}
-							blurred={blurred}
-							handleBlur={this.handleBlur}
-						/>
-						{this.renderCategories()}
-						<View style={styles.bottom}>
-							<View style={styles.bottomHeader}>
-								<Text style={styles.titleText}>Places Nearby</Text>
-							</View>
-							<View style={{ justifyContent: 'center' }}>
-								<NearbyPlaces data={this.state.nearbyPlaces} />
-							</View>
-						</View>
-					</View>
-				</ScrollView>
-			</View>
-		)
+					</ScrollView>
+				</SafeAreaView>
+			)
+		}
 	}
 }
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		backgroundColor: background,
-		alignItems: 'center'
+		alignItems: 'center',
+		justifyContent: 'center'
 	},
 	headerContainer: {
-		flexDirection: 'column',
-		marginTop: 50
+		flexDirection: 'column'
 	},
 	top: {
 		flex: 1
@@ -183,7 +229,6 @@ const styles = StyleSheet.create({
 		fontSize: 24,
 		flex: 1,
 		marginHorizontal: 10,
-		marginTop: 10,
 		color: secondary,
 		fontFamily: Platform.OS === 'ios' ? 'Avenir-Heavy' : 'Roboto'
 	},

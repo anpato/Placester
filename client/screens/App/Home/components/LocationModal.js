@@ -23,8 +23,7 @@ const LocationModal = ({
 	handleBlur,
 	isError,
 	errorMsg,
-	value,
-	navigation
+	value
 }) => {
 	const renderItem = (item, index, separators) => {
 		return (
@@ -54,14 +53,6 @@ const LocationModal = ({
 			transparent={false}>
 			<View style={styles.modal}>
 				<View style={[styles.searchContainer, shadowStyle]}>
-					<TouchableOpacity onPress={onRequestClose}>
-						<IconComponent
-							style={styles.iconStyle}
-							name={Platform.OS === 'ios' ? 'ios-close' : 'md-close'}
-							size={38}
-							color={primary}
-						/>
-					</TouchableOpacity>
 					<Search
 						onChangeText={(text) => onChangeText(text)}
 						onFocus={() => handleBlur(false)}
@@ -86,6 +77,15 @@ const LocationModal = ({
 						renderItem(item, index, separators)
 					}
 				/>
+				<TouchableOpacity
+					onPress={onRequestClose}
+					style={[styles.button, shadowStyle]}>
+					<IconComponent
+						name={Platform.OS === 'ios' ? 'ios-close' : 'md-close'}
+						size={38}
+						color={dark}
+					/>
+				</TouchableOpacity>
 			</View>
 		</Modal>
 	)
@@ -94,18 +94,24 @@ const LocationModal = ({
 const styles = StyleSheet.create({
 	modal: {
 		backgroundColor: dark,
+		paddingBottom: 80,
 		flex: 1
 	},
 	searchContainer: {
-		paddingTop: 10,
 		paddingBottom: 10,
 		backgroundColor: dark,
 		elevation: 1
 	},
-	iconStyle: {
-		alignSelf: 'flex-end',
-		marginRight: 20,
-		marginTop: 20
+	button: {
+		alignSelf: 'center',
+		position: 'absolute',
+		justifyContent: 'center',
+		alignItems: 'center',
+		backgroundColor: primary,
+		width: 50,
+		height: 50,
+		bottom: 20,
+		borderRadius: 50
 	},
 	itemButton: {
 		alignSelf: 'stretch',

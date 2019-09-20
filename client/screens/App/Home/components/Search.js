@@ -46,13 +46,14 @@ const Search = ({
 }
 const styles = StyleSheet.create({
 	title: {
-		flexDirection: 'row'
+		flexDirection: 'row',
+		marginTop: Platform.OS === 'ios' ? 40 : 0
 	},
 	titleText: {
 		fontSize: 24,
 		flex: 1,
 		marginHorizontal: 10,
-		marginTop: 10,
+
 		color: secondary,
 		fontFamily: Platform.OS === 'ios' ? 'Avenir-Heavy' : 'Roboto'
 	},
@@ -72,9 +73,6 @@ const styles = StyleSheet.create({
 		paddingVertical: 10,
 		fontSize: 18,
 		color: white
-	},
-	inModal: {
-		marginTop: 50
 	}
 })
 
