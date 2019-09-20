@@ -50,7 +50,6 @@ export default class HomeScreen extends Component {
 		this.setState({ isLoading: true })
 		await this.getCurrentLocation()
 		await this.fetchCategories()
-		this.setState({ isLoading: false })
 	}
 
 	fetchNearbyPlaces = async () => {
@@ -58,6 +57,7 @@ export default class HomeScreen extends Component {
 		try {
 			const nearbyPlaces = await getPlacesNearby({ lat, lng })
 			this.setState({ nearbyPlaces })
+			this.setState({ isLoading: false })
 		} catch (error) {
 			// console.log(error)
 		}

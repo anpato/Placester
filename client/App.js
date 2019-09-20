@@ -10,12 +10,14 @@ import HomeScreen from './screens/App/Home/HomeScreen'
 import { createBottomTabNavigator } from 'react-navigation-tabs'
 import { Ionicons as IconComponent } from '@expo/vector-icons'
 import { TouchableOpacity } from 'react-native-gesture-handler'
-import ProfileScreen from './screens/App/ProfileScreen'
+import ProfileScreen from './screens/App/Account/ProfileScreen'
 import CameraPage from './screens/App/AddPlace/CameraPage'
 import { FloatingAction } from './common'
+import SplashScreen from './screens/Auth/Splash'
 
 const AuthStack = createStackNavigator(
 	{
+		Splash: SplashScreen,
 		SignIn: AuthScreen,
 		SignUp: SignUpScreen,
 		Confirm: ConfirmScreen
@@ -118,13 +120,13 @@ const AppNavigator = createBottomTabNavigator(
 				borderTopColor: 'transparent'
 			}
 		},
-		initialRouteName: 'Main'
+		initialRouteName: 'Account'
 	}
 )
 
 export default createAppContainer(
 	createSwitchNavigator({
-		// Auth: AuthStack,
+		Auth: AuthStack,
 		App: AppNavigator
 	})
 )

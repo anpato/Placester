@@ -42,6 +42,16 @@ export const signUpUser = async (data) => {
 	}
 }
 
+export const getUserProfile = async () => {
+	try {
+		const userId = await getUserId()
+		const resp = await Api.get(`/auth/${userId}`)
+		return resp.data
+	} catch (error) {
+		throw error
+	}
+}
+
 export const getCategories = async () => {
 	try {
 		const resp = await Api.get('/categories')
