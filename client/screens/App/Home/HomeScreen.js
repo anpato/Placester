@@ -5,7 +5,8 @@ import {
 	StyleSheet,
 	ScrollView,
 	LayoutAnimation,
-	RefreshControl
+	RefreshControl,
+	SafeAreaView
 } from 'react-native'
 import { background, secondary, primary } from '../../../styles/Colors'
 import {
@@ -108,13 +109,21 @@ export default class HomeScreen extends Component {
 
 	handleModal = () => this.setState({ modalVisible: !this.state.modalVisible })
 
-	handleChange = (search) =>
-		this.setState({ search, blurred: false, isError: false, errorMsg: '' })
+	handleChange = (search) => {
+		if (search.length < 1) {
+		} else {
+			this.setState({ search, blurred: false, isError: false, errorMsg: '' })
+		}
+	}
 
 	handleSubmit = async () => {
 		try {
-			const searchResults = await searchPlaces(this.state.search)
-			this.setState({ searchResults })
+			if (this.state.search.length < 1)
+				this.setState({ isError: true, errorMsg: 'Field Cannot Be Empty' })
+			else {
+				const searchResults = await searchPlaces(this.state.search)
+				this.setState({ searchResults })
+			}
 		} catch (error) {
 			this.setState({
 				isError: true,
@@ -127,25 +136,28 @@ export default class HomeScreen extends Component {
 		const { blurred } = this.state
 		if (this.state.isLoading) {
 			return (
-				<View
+				<SafeAreaView
 					style={[
 						styles.container,
 						{ justifyContent: 'center', alignItems: 'center' }
 					]}>
 					<Spinner size="large" color={primary} />
-				</View>
+				</SafeAreaView>
 			)
 		} else {
 			return (
-				<View style={styles.container}>
+				<SafeAreaView style={styles.container}>
 					<ScrollView
+						contentContainerStyle={{
+							paddingBottom: Platform.OS === 'android' ? 50 : 0,
+							marginTop: Platform.OS === 'android' ? 50 : 0
+						}}
 						showsVerticalScrollIndicator={false}
 						refreshControl={
 							<RefreshControl
 								refreshing={this.state.refreshing}
 								onRefresh={this.handleRefresh}
 								tintColor={primary}
-								// size="large"
 							/>
 						}>
 						<View style={styles.top}>
@@ -186,7 +198,7 @@ export default class HomeScreen extends Component {
 							</View>
 						</View>
 					</ScrollView>
-				</View>
+				</SafeAreaView>
 			)
 		}
 	}
@@ -195,11 +207,11 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		backgroundColor: background,
-		alignItems: 'center'
+		alignItems: 'center',
+		justifyContent: 'center'
 	},
 	headerContainer: {
-		flexDirection: 'column',
-		marginTop: 50
+		flexDirection: 'column'
 	},
 	top: {
 		flex: 1
@@ -217,7 +229,6 @@ const styles = StyleSheet.create({
 		fontSize: 24,
 		flex: 1,
 		marginHorizontal: 10,
-		marginTop: 10,
 		color: secondary,
 		fontFamily: Platform.OS === 'ios' ? 'Avenir-Heavy' : 'Roboto'
 	},

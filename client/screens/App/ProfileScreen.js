@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { SafeAreaView, View, Text, StyleSheet } from 'react-native'
 import { background } from '../../styles/Colors'
 export default class ProfileScreen extends Component {
 	render() {
 		return (
-			<View style={styles.container}>
+			<SafeAreaView style={styles.container}>
 				<Text> Profile</Text>
-			</View>
+			</SafeAreaView>
 		)
 	}
 }

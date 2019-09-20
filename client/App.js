@@ -11,7 +11,6 @@ import { createBottomTabNavigator } from 'react-navigation-tabs'
 import { Ionicons as IconComponent } from '@expo/vector-icons'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import ProfileScreen from './screens/App/ProfileScreen'
-import PlaceUpload from './screens/App/AddPlace/PlaceUpload'
 import CameraPage from './screens/App/AddPlace/CameraPage'
 import { FloatingAction } from './common'
 
@@ -66,12 +65,12 @@ const AppNavigator = createBottomTabNavigator(
 			screen: UploadStack,
 			navigationOptions: ({ navigation }) => ({
 				tabBarIcon: ({ focused }) => (
-					<FloatingAction onPress={() => navigation.navigate('Upload')}>
+					<FloatingAction>
 						<IconComponent
 							name={
 								Platform.OS === 'ios'
-									? `ios-camera${focused ? '' : ''}`
-									: `md-camera${focused ? '' : ''}`
+									? `ios-add${focused ? '' : ''}`
+									: `md-add${focused ? '' : ''}`
 							}
 							color={dark}
 							size={32}
@@ -115,7 +114,8 @@ const AppNavigator = createBottomTabNavigator(
 			inactiveTintColor: primaryLight,
 
 			style: {
-				backgroundColor: dark
+				backgroundColor: dark,
+				borderTopColor: 'transparent'
 			}
 		},
 		initialRouteName: 'Main'

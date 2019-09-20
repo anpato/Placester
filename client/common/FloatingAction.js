@@ -1,10 +1,10 @@
 import React from 'react'
-import { TouchableOpacity, StyleSheet } from 'react-native'
+import { TouchableOpacity, StyleSheet, Animated } from 'react-native'
 import { primary } from '../styles/Colors'
 
-export const FloatingAction = (props) => (
-	<TouchableOpacity {...props} style={styles.button} />
-)
+export const FloatingAction = (props) => {
+	return <TouchableOpacity {...props} style={styles.button} />
+}
 
 const styles = StyleSheet.create({
 	button: {
