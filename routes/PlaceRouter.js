@@ -1,38 +1,74 @@
 const PlaceRouter = require('express').Router()
 const { Place, Category } = require('../database/Schema')
 
-PlaceRouter.get('/', async (req, res) => {
+PlaceRouter.get('/', async (req, res, next) => {
+	try {
+		const location = { lat: req.query.lat, lng: req.query.lng }
+		if (req.query.search || req.query.page || (location.lat && location.lng)) {
+			if (req.query.search) {
+				await Place.find().exec((err, data) => {
+					const place = data.filter(
+						(item) =>
+							item.name
+								.toLowerCase()
+								.includes(req.query.search.toLowerCase()) ||
+							item.location.city
+								.toLowerCase()
+								.includes(req.query.search.toLowerCase()) ||
+							item.location.state
+								.toLowerCase()
+								.includes(req.query.search.toLowerCase())
+					)
+					if (place.length) res.send(place)
+					else {
+						let err = new Error(
+							`No place found with name of ${req.query.search}`
+						)
+						err.status = 400
+						return next(err)
+					}
+				})
+			}
+			if (location.lat && location.lng) {
+				await Place.find().exec((err, data) => {
+					const places = data.filter(
+						(place) =>
+							(place.location.lat >= parseFloat(location.lat) + 0.2 &&
+								place.location.lng >= parseFloat(location.lng) + 0.2) ||
+							(place.location.lat <= parseFloat(location.lat) - 0.2 &&
+								place.location.lng <= parseFloat(location.lng) + 0.2)
+					)
+					if (places.length) res.send(places)
+					else {
+						let err = new Error(`No places found nearby.`)
+						err.status = 400
+						return next(err)
+					}
+				})
+			}
+		}
+	} catch (error) {
+		res.json({ error: error })
+	}
+})
+
+PlaceRouter.get('/all', async (req, res) => {
 	try {
 		const limit = 10
 		const page = req.query.page || 1
-		if (req.query.name || req.query.page) {
-			if (req.query.name) {
-				await Place.find().exec((err, data) => {
-					const place = data.filter((location) =>
-						location.name.toLowerCase().includes(req.query.name.toLowerCase())
+		await Place.find()
+			.skip(limit * page - page)
+			.limit(limit)
+			.exec(async (err, places) => {
+				if (err) res.status(400).send({ err })
+				else {
+					await Place.countDocuments().exec((err, count) =>
+						res.send({ places, page, pages: Math.ceil(count / limit) })
 					)
-					if (place.length) res.send(place)
-					else
-						res
-							.status(400)
-							.send({ msg: `No place found with name of ${req.query.name}` })
-				})
-			} else {
-				await Place.find()
-					.skip(limit * page - page)
-					.limit(limit)
-					.exec(async (err, places) => {
-						if (err) res.status(400).send({ err })
-						await Place.count().exec((err, count) =>
-							res.send({ places, page, pages: Math.ceil(count / limit) })
-						)
-					})
-			}
-		} else {
-			res.send(await Place.find())
-		}
+				}
+			})
 	} catch (error) {
-		throw error
+		res.json({ error: error })
 	}
 })
 
@@ -81,6 +117,25 @@ PlaceRouter.delete('/:place_id', async (req, res) => {
 		const place = await Place.findById(req.params.place_id)
 		await place.remove()
 		res.send({ msg: `Successfully removed ${place.name}` })
+	} catch (error) {
+		throw error
+	}
+})
+
+PlaceRouter.post('/populate', async (req, res) => {
+	try {
+		await Place.find().exec(async (err, data) => {
+			const incomingData = req.body.filter(
+				(locations) =>
+					locations.name !== data.name || locations._id !== data._id
+			)
+			if (incomingData.length)
+				await Place.collection.insertMany(incomingData, (err, docs) => {
+					if (err) console.log(err)
+					else res.send(incomingData)
+				})
+			else res.send({ msg: 'Posted' })
+		})
 	} catch (error) {
 		throw error
 	}

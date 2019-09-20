@@ -12,6 +12,7 @@ dotenv.config()
 // routers
 const AuthRouter = require('./routes/AuthRouter')
 const CategoryRouter = require('./routes/CategoryRouter')
+const DevRouter = require('./routes/DevRouter')
 const FavoriteRouter = require('./routes/FavoriteRouter')
 const FriendRouter = require('./routes/FriendRouter')
 const PlaceRouter = require('./routes/PlaceRouter')
@@ -35,6 +36,7 @@ app.use('/categories', CategoryRouter)
 app.use('/favorites', FavoriteRouter)
 app.use('/friends', FriendRouter)
 app.use('/places', PlaceRouter)
+app.use('/dev', DevRouter)
 app.use(passport.initialize())
 
 // mongoose connection to mongo cloud db
