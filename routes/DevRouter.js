@@ -3,19 +3,16 @@ const { Place, Category } = require('../database/schema')
 
 DevRouter.put('/', async (req, res) => {
 	try {
-		await Place.find().exec((err, data) => {
-			const places = data.filter(async (place) => {
-				if (place.name.toLowerCase().includes(req.query.name.toLowerCase())) {
-					const newPlaces = await Place.findByIdAndUpdate(place._id, {
-						categories: [req.query.category]
-					})
-					return newPlaces
-				} else {
-					return null
+		const places = await Place.find()
+		const categories = await Category.find()
+
+		places.forEach((place) => {
+			categories.forEach((category) => {
+				if (
+					place.name.toLowerCase().includes('family', 'park', 'museum', 'beach')
+				) {
 				}
 			})
-			res.send(places)
-			console.log(places)
 		})
 	} catch (error) {
 		throw error
