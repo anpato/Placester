@@ -74,7 +74,7 @@ AuthRouter.delete('/:user_id', async (req, res) => {
 	}
 })
 
-authRouter.get('/:user_id', async (req, res) => {
+AuthRouter.get('/:user_id', async (req, res) => {
 	try {
 		await User.findById(req.params.user_id).exec((err, data) => {
 			const {
@@ -94,7 +94,7 @@ authRouter.get('/:user_id', async (req, res) => {
 	}
 })
 
-authRouter.put('/:user_id', async (req, res) => {
+AuthRouter.put('/:user_id', async (req, res) => {
 	try {
 		const user = await User.findById(req.params.user_id)
 		if (req.body.password) {
@@ -112,4 +112,4 @@ authRouter.put('/:user_id', async (req, res) => {
 	}
 })
 
-module.exports = authRouter
+module.exports = AuthRouter
