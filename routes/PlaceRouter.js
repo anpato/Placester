@@ -4,8 +4,6 @@ const { Place, Category } = require('../database/Schema')
 
 PlaceRouter.get('/', async (req, res, next) => {
 	try {
-		const limit = 10
-		const page = req.query.page || 1
 		const location = { lat: req.query.lat, lng: req.query.lng }
 		if (req.query.search || req.query.page || (location.lat && location.lng)) {
 			if (req.query.search) {
@@ -48,20 +46,28 @@ PlaceRouter.get('/', async (req, res, next) => {
 						return next(err)
 					}
 				})
-			} else {
-				await Place.find()
-					.skip(limit * page - page)
-					.limit(limit)
-					.exec(async (err, places) => {
-						if (err) res.status(400).send({ err })
-						await Place.count().exec((err, count) =>
-							res.send({ places, page, pages: Math.ceil(count / limit) })
-						)
-					})
 			}
-		} else {
-			res.send(await Place.find())
 		}
+	} catch (error) {
+		res.json({ error: error })
+	}
+})
+
+PlaceRouter.get('/all', async (req, res) => {
+	try {
+		const limit = 10
+		const page = req.query.page || 1
+		await Place.find()
+			.skip(limit * page - page)
+			.limit(limit)
+			.exec(async (err, places) => {
+				if (err) res.status(400).send({ err })
+				else {
+					await Place.countDocuments().exec((err, count) =>
+						res.send({ places, page, pages: Math.ceil(count / limit) })
+					)
+				}
+			})
 	} catch (error) {
 		res.json({ error: error })
 	}
