@@ -11,7 +11,7 @@ mm < 10 ? (mm = `0${mm}`) : mm
 const yyyy = today.getFullYear()
 const date = `${yyyy}${mm}${dd}`
 
-const Api = Axios.create({
+export const Api = Axios.create({
 	baseURL: BASE_URL,
 	headers: {
 		Authorization: `Bearer ${JwtToken}`,
