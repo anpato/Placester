@@ -21,6 +21,7 @@ import { Platform } from '@unimodules/core'
 import NearbyPlaces from './components/NearbyPlaces'
 import { Spinner } from '../../../common'
 import { getNearbyPlaces } from '../../../services/config/LocationSearch'
+import { getNearbyPlaces } from '../../../services/config/LocationSearch'
 
 export default class HomeScreen extends Component {
 	constructor(props) {
