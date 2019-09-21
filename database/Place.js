@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
+const uniqueValidator = require('mongoose-unique-validator')
 
 const PlaceSchema = new Schema(
 	{
@@ -43,7 +44,6 @@ const PlaceSchema = new Schema(
 		timestamps: true
 	}
 )
-
-PlaceSchema.index({ name: PlaceSchema.name }, { unique: true })
+PlaceSchema.plugin(uniqueValidator)
 
 module.exports = PlaceSchema
