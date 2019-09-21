@@ -125,14 +125,9 @@ PlaceRouter.delete('/:place_id', async (req, res) => {
 
 PlaceRouter.post('/populate', async (req, res) => {
 	try {
-		await Place.find().exec(async (err, data) => {
-			const incomingData = req.body.filter(
-				(locations) => locations.name !== data.name
-			)
-			// await Place.collection.insertMany(incomingData, (err, docs) =>
-			// 	res.send(incomingData)
-			// )
-		})
+		await Place.insertMany(req.body)
+			.then((data) => console.log(data))
+			.catch((err) => console.log(err))
 	} catch (error) {
 		console.log(error)
 		throw error
