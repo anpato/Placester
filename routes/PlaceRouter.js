@@ -129,11 +129,12 @@ PlaceRouter.post('/populate', async (req, res) => {
 			const incomingData = req.body.filter(
 				(locations) => locations.name !== data.name
 			)
-			await Place.collection.insertMany(incomingData, (err, docs) =>
-				res.send(incomingData)
-			)
+			// await Place.collection.insertMany(incomingData, (err, docs) =>
+			// 	res.send(incomingData)
+			// )
 		})
 	} catch (error) {
+		console.log(error)
 		throw error
 	}
 })

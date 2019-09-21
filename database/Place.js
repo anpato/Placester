@@ -5,6 +5,7 @@ const PlaceSchema = new Schema(
 	{
 		name: {
 			required: true,
+			unique: true,
 			type: String
 		},
 		location: {
@@ -42,5 +43,7 @@ const PlaceSchema = new Schema(
 		timestamps: true
 	}
 )
+
+PlaceSchema.index({ name: PlaceSchema.name }, { unique: true })
 
 module.exports = PlaceSchema
