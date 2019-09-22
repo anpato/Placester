@@ -13,21 +13,11 @@ const PlaceSchema = new Schema(
 			address: {
 				type: String
 			},
-			city: {
-				type: String
-			},
-			state: {
-				type: String
-			},
 			lng: {
 				type: Number
 			},
 			lat: {
 				type: Number
-			},
-			postalCode: String,
-			cc: {
-				type: String
 			}
 		},
 		images: {
@@ -38,7 +28,10 @@ const PlaceSchema = new Schema(
 				type: Schema.Types.ObjectId,
 				ref: 'Category'
 			}
-		]
+		],
+		rating: {
+			type: Number
+		}
 	},
 	{
 		timestamps: true
