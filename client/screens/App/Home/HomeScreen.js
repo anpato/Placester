@@ -20,7 +20,6 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 import { Platform } from '@unimodules/core'
 import NearbyPlaces from './components/NearbyPlaces'
 import { Spinner } from '../../../common'
-import { getNearbyPlaces } from '../../../services/config/LocationSearch'
 
 export default class HomeScreen extends Component {
 	constructor(props) {
@@ -57,12 +56,11 @@ export default class HomeScreen extends Component {
 		const { lat, lng } = this.state.location
 		try {
 			const nearbyPlaces = await getPlacesNearby({ lat, lng })
-			await getNearbyPlaces({ lat, lng })
 			// console.log(places)
 			this.setState({ nearbyPlaces })
 			this.setState({ isLoading: false })
 		} catch (error) {
-			// console.log(error)
+			console.log(error)
 		}
 	}
 

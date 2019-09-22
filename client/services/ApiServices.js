@@ -1,6 +1,13 @@
 import Axios from 'axios'
 import { setUser, getUserId, getToken } from './config/Credentials'
-import { CLIENT_SECRET, CLIENT_ID, CURRENT_ADDRESS } from 'react-native-dotenv'
+import {
+	CURRENT_ADDRESS,
+	HERE_KEY,
+	HERE_APPID,
+	GOOGLE_PLACES_KEY,
+	MAPBOX_KEY
+} from 'react-native-dotenv'
+import { populate } from './config/LocationSearch'
 const BASE_URL = `http://${CURRENT_ADDRESS}:3001`
 const JwtToken = 'token'
 const today = new Date()
@@ -11,7 +18,7 @@ mm < 10 ? (mm = `0${mm}`) : mm
 const yyyy = today.getFullYear()
 const date = `${yyyy}${mm}${dd}`
 
-export const Api = Axios.create({
+const Api = Axios.create({
 	baseURL: BASE_URL,
 	headers: {
 		Authorization: `Bearer ${JwtToken}`,
@@ -19,8 +26,16 @@ export const Api = Axios.create({
 	}
 })
 
-const FourSquare = Axios.create({
-	baseURL: 'https://api.foursquare.com/v2/venues'
+const GoogleApi = Axios.create({
+	baseURL: `https://maps.googleapis.com/maps/api/`
+})
+
+const HereApi = Axios.create({
+	baseURL: `https://places.cit.api.here.com/places/v1`
+})
+
+const MapboxAPi = Axios.create({
+	baseURL: `https://api.mapbox.com/geocoding/v5/mapbox.places/`
 })
 
 export const loginUser = async (data) => {
@@ -70,33 +85,42 @@ export const searchPlaces = async (query) => {
 	}
 }
 
-const getFourSquarePlaces = async (coords) => {
-	const resp = await FourSquare.get(
-		`/search?client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&ll=${coords.lat},
-			${coords.lng}&v=${date}`
-	)
-	if (resp) {
-		const data = resp.data.response.venues.map((place, index) => {
-			const places = {
-				name: place.name,
-				location: {
-					lat: place.location.lat,
-					lng: place.location.lng,
-					city: place.location.city,
-					state: place.location.state,
-					cc: place.location.cc
-				}
-			}
-			return places
-		})
-		await Api.post('/places/populate', data)
+export const geoCode = async (coords) => {
+	try {
+		const resp = await MapboxAPi.get(
+			`${coords.lng},${coords.lat}.json?&access_token=${MAPBOX_KEY}`
+		)
+	} catch (error) {
+		console.log(error)
 	}
-	return true
 }
 
-export const getPlacesNearby = async (coords) => {
+export const getPlacesImages = async (imageRef) => {
 	try {
-		// await getFourSquarePlaces(coords)
+		const resp = await GoogleApi.post(
+			`/place/photo?photoreference=${imageRef}&maxheight=300&key=${GOOGLE_PLACES_KEY}`
+		)
+		return resp.request.responseURL
+	} catch (error) {
+		throw error
+	}
+}
+
+const getNearbyPlaces = async (coords, query) => {
+	try {
+		const resp = await GoogleApi.post(
+			`place/nearbysearch/json?location=${coords.lat},${coords.lng}&radius=800&type=${query}&key=${GOOGLE_PLACES_KEY}`
+		)
+		const data = await populate(resp.data.results, getPlacesImages)
+		await Api.post('/places/populate', data)
+	} catch (error) {
+		throw error
+	}
+}
+
+export const getPlacesNearby = async (coords, query) => {
+	try {
+		if (query) await getNearbyPlaces(coords, query)
 		const resp = await Api.get(`/places/?lat=${coords.lat}&lng=${coords.lng}`)
 		return resp.data.splice(0, 10)
 	} catch (error) {
