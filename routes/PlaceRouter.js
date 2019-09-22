@@ -8,17 +8,8 @@ PlaceRouter.get('/', async (req, res, next) => {
 		if (req.query.search || req.query.page || (location.lat && location.lng)) {
 			if (req.query.search) {
 				await Place.find().exec((err, data) => {
-					const place = data.filter(
-						(item) =>
-							item.name
-								.toLowerCase()
-								.includes(req.query.search.toLowerCase()) ||
-							item.location.city
-								.toLowerCase()
-								.includes(req.query.search.toLowerCase()) ||
-							item.location.state
-								.toLowerCase()
-								.includes(req.query.search.toLowerCase())
+					const place = data.filter((item) =>
+						item.name.toLowerCase().includes(req.query.search.toLowerCase())
 					)
 					if (place.length) res.send(place)
 					else {

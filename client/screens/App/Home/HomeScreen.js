@@ -111,14 +111,18 @@ export default class HomeScreen extends Component {
 	handleModal = () => this.setState({ modalVisible: !this.state.modalVisible })
 
 	handleChange = (search) => {
-		if (search.length < 1) {
-		} else {
-			this.setState({ search, blurred: false, isError: false, errorMsg: '' })
-		}
+		this.setState({
+			search,
+			blurred: false,
+			isError: false,
+			errorMsg: '',
+			searchResults: []
+		})
 	}
 
 	handleSubmit = async () => {
 		try {
+			console.log(this.state.search)
 			if (this.state.search.length < 1)
 				this.setState({ isError: true, errorMsg: 'Field Cannot Be Empty' })
 			else {
