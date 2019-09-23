@@ -3,10 +3,11 @@ import { View, FlatList, StyleSheet, Dimensions } from 'react-native'
 import ListButton from './ListButton'
 
 const NearbyPlaces = ({ data }) => {
-	const renderItem = ({ _id, image_url, name }) => {
+	const renderItem = ({ _id, images, name }) => {
+		console.log(images[0])
 		return (
 			<ListButton
-				image_url={image_url}
+				image_url={images.length ? images[0] : null}
 				name={name}
 				imageStyle={{
 					width: styles.card.width,
@@ -23,7 +24,7 @@ const NearbyPlaces = ({ data }) => {
 				showsVerticalScrollIndicator={false}
 				initialNumToRender={10}
 				data={data}
-				keyExtractor={(item) => item._id}
+				keyExtractor={(item, index) => index.toString()}
 				renderItem={({ item }) => renderItem(item)}
 			/>
 		</View>
@@ -39,7 +40,7 @@ const styles = StyleSheet.create({
 	card: {
 		margin: 10,
 		alignSelf: 'stretch',
-		width: 'auto',
+		width: 300,
 		height: 200,
 		borderRadius: 20
 	}

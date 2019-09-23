@@ -13,6 +13,10 @@ const PlaceSchema = new Schema(
 			address: {
 				type: String
 			},
+			city: String,
+			state: String,
+			cc: String,
+			postalCode: String,
 			lng: {
 				type: Number
 			},

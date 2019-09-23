@@ -12,7 +12,7 @@ const ListButton = ({ id, image_url, name, style, imageStyle }) => {
 			onPress={() => console.log(id)}>
 			<View style={style}>
 				<Image
-					source={{ uri: image_url }}
+					source={{ uri: image_url ? image_url : null }}
 					style={[{ borderRadius: 20 }, imageStyle]}
 				/>
 				<View style={styles.overlay}>

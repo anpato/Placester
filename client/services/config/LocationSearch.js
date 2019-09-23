@@ -1,20 +1,21 @@
 export const populate = async (arr, images) => {
 	return await Promise.all(
 		arr.map(async (location) => {
-			const image = location.photos[0].photo_reference
-				? await images(location.photos[0].photo_reference)
-				: []
+			const image = await images(location.id)
 			const obj = {
 				name: location.name,
 				location: {
-					lat: location.geometry.location.lat,
-					lng: location.geometry.location.lng,
-					address: location.vicinity
+					lat: location.location.lat,
+					lng: location.location.lng,
+					address: location.location.formattedAddress[0],
+					state: location.location.state,
+					cc: location.location.cc,
+					city: location.location.city
 				},
-				images: [image],
-				rating: location.rating
+				images: image ? [`${image.prefix}400x500/${image.suffix}`] : [],
+				rating: 0
 			}
-			// console.log('incoming data', obj)
+			console.log(obj)
 			return obj
 		})
 	)
@@ -22,16 +23,6 @@ export const populate = async (arr, images) => {
 
 export const reverseGeoCode = (coords) => {}
 
-// export const populateGoogle = (arr) => {
-// 	return arr.map(location => {
-// 		const obj = {
-// 			name: location.name,
-// 			location: {
-// 				lat: location.geometry.location.lat,
-// 				lng: location.geometry.location.lng,
-// 				address:
-// 			},
-// 			rating: location.rating
-// 		}
-// 	})
-// }
+export const retrieveFromFourSquare = async (arr, fourSquare) => {
+	return await Promise.all(arr.map())
+}

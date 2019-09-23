@@ -2,21 +2,17 @@ import Axios from 'axios'
 import { setUser, getUserId, getToken } from './config/Credentials'
 import {
 	CURRENT_ADDRESS,
+	CLIENT_ID,
+	CLIENT_SECRET,
 	HERE_KEY,
 	HERE_APPID,
 	GOOGLE_PLACES_KEY,
 	MAPBOX_KEY
 } from 'react-native-dotenv'
 import { populate } from './config/LocationSearch'
-const BASE_URL = `http://${CURRENT_ADDRESS}:3001`
+const BASE_URL = `http://192.168.2.6:3001`
 const JwtToken = 'token'
-const today = new Date()
-let dd = today.getDate()
-let mm = today.getMonth()
-dd < 10 ? (dd = `0${dd}`) : dd
-mm < 10 ? (mm = `0${mm}`) : mm
-const yyyy = today.getFullYear()
-const date = `${yyyy}${mm}${dd}`
+const date = `20180802`
 
 const Api = Axios.create({
 	baseURL: BASE_URL,
@@ -36,6 +32,10 @@ const HereApi = Axios.create({
 
 const MapboxAPi = Axios.create({
 	baseURL: `https://api.mapbox.com/geocoding/v5/mapbox.places/`
+})
+
+const FourSquareApi = Axios.create({
+	baseURL: `https://api.foursquare.com/v2/venues`
 })
 
 export const loginUser = async (data) => {
@@ -108,23 +108,63 @@ export const getPlacesImages = async (imageRef) => {
 
 const getNearbyPlaces = async (coords, query) => {
 	try {
-		const resp = await GoogleApi.post(
-			`place/nearbysearch/json?location=${coords.lat},${coords.lng}&radius=800&key=${GOOGLE_PLACES_KEY}`
-		)
-		console.log(resp.data.results)
+		let resp
+		if (query) {
+			resp = await GoogleApi.post(
+				`place/nearbysearch/json?location=${coords.lat},${coords.lng}&radius=800&q=${query}key=${GOOGLE_PLACES_KEY}`
+			)
+		} else {
+			resp = await GoogleApi.post(
+				`place/nearbysearch/json?location=${coords.lat},${coords.lng}&radius=800&key=${GOOGLE_PLACES_KEY}`
+			)
+		}
 
-		// await Api.post('/places/populate', data)
+		return resp.data.results.map((location) => {
+			const coords = {
+				lat: location.geometry.location.lat,
+				lng: location.geometry.location.lng
+			}
+			return coords
+		})
 	} catch (error) {
 		throw error
 	}
 }
-// const data = await populate(resp.data.results, getPlacesImages)
+
+const fourSquarePlaces = async (data) => {
+	try {
+		let results = await Promise.all(
+			await data.map(async (coord) => {
+				const resp = await FourSquareApi.get(
+					`/search/?ll=${coord.lat},${coord.lng}&radius=500&limit=10&client_secret=${CLIENT_SECRET}&client_id=${CLIENT_ID}&v=${date}`
+				)
+				return resp.data.response.venues
+			})
+		)
+		return [...results[0]]
+	} catch (error) {
+		throw error
+	}
+}
+
+const fourSquareImages = async (location_id) => {
+	try {
+		const resp = await FourSquareApi.get(
+			`/${location_id}/photos?client_secret=${CLIENT_SECRET}&client_id=${CLIENT_ID}&v=${date}`
+		)
+		return resp.data.response.photos.items[1]
+	} catch (error) {
+		console.log(error)
+	}
+}
+
 export const getPlacesNearby = async (coords, query) => {
 	try {
-		// if (query)
-		await getNearbyPlaces(coords, query)
-		// const resp = await Api.get(`/places/?lat=${coords.lat}&lng=${coords.lng}`)
-		// return resp.data.splice(0, 10)
+		const data = await getNearbyPlaces(coords, query)
+		const places = await fourSquarePlaces(data)
+		const incomingData = await populate(places, fourSquareImages)
+		const results = await Api.post('/places/populate', incomingData)
+		return results.data
 	} catch (error) {
 		throw error
 	}
