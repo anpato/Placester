@@ -109,20 +109,22 @@ export const getPlacesImages = async (imageRef) => {
 const getNearbyPlaces = async (coords, query) => {
 	try {
 		const resp = await GoogleApi.post(
-			`place/nearbysearch/json?location=${coords.lat},${coords.lng}&radius=800&type=${query}&key=${GOOGLE_PLACES_KEY}`
+			`place/nearbysearch/json?location=${coords.lat},${coords.lng}&radius=800&key=${GOOGLE_PLACES_KEY}`
 		)
-		const data = await populate(resp.data.results, getPlacesImages)
-		await Api.post('/places/populate', data)
+		console.log(resp.data.results)
+
+		// await Api.post('/places/populate', data)
 	} catch (error) {
 		throw error
 	}
 }
-
+// const data = await populate(resp.data.results, getPlacesImages)
 export const getPlacesNearby = async (coords, query) => {
 	try {
-		if (query) await getNearbyPlaces(coords, query)
-		const resp = await Api.get(`/places/?lat=${coords.lat}&lng=${coords.lng}`)
-		return resp.data.splice(0, 10)
+		// if (query)
+		await getNearbyPlaces(coords, query)
+		// const resp = await Api.get(`/places/?lat=${coords.lat}&lng=${coords.lng}`)
+		// return resp.data.splice(0, 10)
 	} catch (error) {
 		throw error
 	}
