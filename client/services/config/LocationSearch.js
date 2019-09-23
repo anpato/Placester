@@ -12,7 +12,7 @@ export const populate = async (arr, images) => {
 					cc: location.location.cc,
 					city: location.location.city
 				},
-				images: image ? [`${image.prefix}400x500/${image.suffix}`] : [],
+				images: image ? [`${image.prefix}400x500${image.suffix}`] : [],
 				rating: 0
 			}
 			console.log(obj)

@@ -10,7 +10,7 @@ import {
 	MAPBOX_KEY
 } from 'react-native-dotenv'
 import { populate } from './config/LocationSearch'
-const BASE_URL = `http://192.168.2.6:3001`
+const BASE_URL = `http://${CURRENT_ADDRESS}:3001`
 const JwtToken = 'token'
 const date = `20180802`
 

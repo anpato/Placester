@@ -4,7 +4,6 @@ import ListButton from './ListButton'
 
 const NearbyPlaces = ({ data }) => {
 	const renderItem = ({ _id, images, name }) => {
-		console.log(images[0])
 		return (
 			<ListButton
 				image_url={images.length ? images[0] : null}
@@ -38,9 +37,9 @@ const styles = StyleSheet.create({
 		paddingVertical: 10
 	},
 	card: {
-		margin: 10,
+		marginVertical: 10,
 		alignSelf: 'stretch',
-		width: 300,
+		width: Dimensions.get('window').width - 20,
 		height: 200,
 		borderRadius: 20
 	}
